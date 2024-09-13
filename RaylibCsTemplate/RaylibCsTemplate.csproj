@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>RaylibCsharpTest</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Raylib-CSharp-Vinculum" Version="5.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Source\Packages\Objects\Animation\" />
+      <Folder Include="Source\Packages\Objects\Hitbox\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\photo_2024-04-13_09-33-43.jpg" />
+      <None Remove="Resources\photo.png" />
+    </ItemGroup>
+
+</Project>

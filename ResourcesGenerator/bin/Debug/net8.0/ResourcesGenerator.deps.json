@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ResourcesGenerator/1.0.0": {
+        "dependencies": {
+          "IronZIP": "2024.9.3"
+        },
+        "runtime": {
+          "ResourcesGenerator.dll": {}
+        }
+      },
+      "IronZIP/2024.9.3": {
+        "runtime": {
+          "lib/netstandard2.0/IronZip.dll": {
+            "assemblyVersion": "2024.9.0.3",
+            "fileVersion": "2024.9.0.3"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ResourcesGenerator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IronZIP/2024.9.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lTk/FaS1eXbQ9fxJFosx+wrRdyS0AUnGciflJG7QjQ7whr9BmuUDJM8iZ2mijTRw/tKhovhWFkRtdSGvNuxZYw==",
+      "path": "ironzip/2024.9.3",
+      "hashPath": "ironzip.2024.9.3.nupkg.sha512"
+    }
+  }
+}
