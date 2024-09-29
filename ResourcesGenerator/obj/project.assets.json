@@ -2,46 +2,391 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "IronZIP/2024.9.3": {
+      "CommunityToolkit.HighPerformance/8.1.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/IronZip.dll": {
-            "related": ".deps.json;.pdb;.xml"
+          "lib/net7.0/CommunityToolkit.HighPerformance.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/IronZip.dll": {
-            "related": ".deps.json;.pdb;.xml"
+          "lib/net7.0/CommunityToolkit.HighPerformance.dll": {
+            "related": ".pdb;.xml"
           }
+        }
+      },
+      "EasyCompressor/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/EasyCompressor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/EasyCompressor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "EasyCompressor.LZ4/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "EasyCompressor": "2.0.2",
+          "K4os.Compression.LZ4": "1.3.6",
+          "K4os.Compression.LZ4.Streams": "1.3.6"
+        },
+        "compile": {
+          "lib/net8.0/EasyCompressor.LZ4.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/EasyCompressor.LZ4.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "K4os.Compression.LZ4/1.3.6": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/K4os.Compression.LZ4.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/K4os.Compression.LZ4.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "K4os.Compression.LZ4.Streams/1.3.6": {
+        "type": "package",
+        "dependencies": {
+          "K4os.Compression.LZ4": "1.3.6",
+          "K4os.Hash.xxHash": "1.0.8",
+          "System.IO.Pipelines": "6.0.3"
+        },
+        "compile": {
+          "lib/net6.0/K4os.Compression.LZ4.Streams.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/K4os.Compression.LZ4.Streams.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "K4os.Hash.xxHash/1.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/K4os.Hash.xxHash.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/K4os.Hash.xxHash.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Raylib-CSharp-Vinculum/5.0.1": {
+        "type": "package",
+        "dependencies": {
+          "CommunityToolkit.HighPerformance": "8.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/Raylib-CSharp-Vinculum.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Raylib-CSharp-Vinculum.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libraylib.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/win-x64/native/raylib.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/raylib.exp": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/raylib.lib": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/raylib.pdb": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "System.IO.Pipelines/6.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.IO.Pipelines.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.IO.Pipelines.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         }
       }
     }
   },
   "libraries": {
-    "IronZIP/2024.9.3": {
-      "sha512": "lTk/FaS1eXbQ9fxJFosx+wrRdyS0AUnGciflJG7QjQ7whr9BmuUDJM8iZ2mijTRw/tKhovhWFkRtdSGvNuxZYw==",
+    "CommunityToolkit.HighPerformance/8.1.0": {
+      "sha512": "kgDi65k02hrgnHy3N0xENecsr0spW13RdIA1tipovi9t16gKziI7uZIu3qkxz0GctCHNM4hfeqXYg//6wHJ6Kw==",
       "type": "package",
-      "path": "ironzip/2024.9.3",
+      "path": "communitytoolkit.highperformance/8.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "EULA.txt",
-        "docs/README.md",
-        "images/iron-logo-128.png",
-        "ironzip.2024.9.3.nupkg.sha512",
-        "ironzip.nuspec",
-        "lib/netstandard2.0/IronZip.deps.json",
-        "lib/netstandard2.0/IronZip.dll",
-        "lib/netstandard2.0/IronZip.pdb",
-        "lib/netstandard2.0/IronZip.xml",
-        "readme-setup.txt",
-        "readme.txt"
+        "Icon.png",
+        "License.md",
+        "ThirdPartyNotices.txt",
+        "communitytoolkit.highperformance.8.1.0.nupkg.sha512",
+        "communitytoolkit.highperformance.nuspec",
+        "lib/net6.0/CommunityToolkit.HighPerformance.dll",
+        "lib/net6.0/CommunityToolkit.HighPerformance.pdb",
+        "lib/net6.0/CommunityToolkit.HighPerformance.xml",
+        "lib/net7.0/CommunityToolkit.HighPerformance.dll",
+        "lib/net7.0/CommunityToolkit.HighPerformance.pdb",
+        "lib/net7.0/CommunityToolkit.HighPerformance.xml",
+        "lib/netstandard2.0/CommunityToolkit.HighPerformance.dll",
+        "lib/netstandard2.0/CommunityToolkit.HighPerformance.pdb",
+        "lib/netstandard2.0/CommunityToolkit.HighPerformance.xml",
+        "lib/netstandard2.1/CommunityToolkit.HighPerformance.dll",
+        "lib/netstandard2.1/CommunityToolkit.HighPerformance.pdb",
+        "lib/netstandard2.1/CommunityToolkit.HighPerformance.xml"
+      ]
+    },
+    "EasyCompressor/2.0.2": {
+      "sha512": "5lf5euWbDl+Xuer0kDL3NGUwcYXlANAiaThfYaqXbkdvm6cfZcr12SnmUN4Ksme3fHeCeBB4ZYxbKT3TwBimlA==",
+      "type": "package",
+      "path": "easycompressor/2.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "EasyCompressor.png",
+        "README.md",
+        "easycompressor.2.0.2.nupkg.sha512",
+        "easycompressor.nuspec",
+        "lib/net462/EasyCompressor.dll",
+        "lib/net462/EasyCompressor.xml",
+        "lib/net6.0/EasyCompressor.dll",
+        "lib/net6.0/EasyCompressor.xml",
+        "lib/net7.0/EasyCompressor.dll",
+        "lib/net7.0/EasyCompressor.xml",
+        "lib/net8.0/EasyCompressor.dll",
+        "lib/net8.0/EasyCompressor.xml",
+        "lib/netstandard2.0/EasyCompressor.dll",
+        "lib/netstandard2.0/EasyCompressor.xml",
+        "lib/netstandard2.1/EasyCompressor.dll",
+        "lib/netstandard2.1/EasyCompressor.xml"
+      ]
+    },
+    "EasyCompressor.LZ4/2.0.2": {
+      "sha512": "izblFqdRJdu8nYMFgQcH8aj/gcfQ7XM8UbUiLkjEnJnOjh7GcjFZ4D1K+fiHL5CROVAf7FPi1l6NQe+61SWJbA==",
+      "type": "package",
+      "path": "easycompressor.lz4/2.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "EasyCompressor.png",
+        "README.md",
+        "easycompressor.lz4.2.0.2.nupkg.sha512",
+        "easycompressor.lz4.nuspec",
+        "lib/net462/EasyCompressor.LZ4.dll",
+        "lib/net462/EasyCompressor.LZ4.xml",
+        "lib/net6.0/EasyCompressor.LZ4.dll",
+        "lib/net6.0/EasyCompressor.LZ4.xml",
+        "lib/net7.0/EasyCompressor.LZ4.dll",
+        "lib/net7.0/EasyCompressor.LZ4.xml",
+        "lib/net8.0/EasyCompressor.LZ4.dll",
+        "lib/net8.0/EasyCompressor.LZ4.xml",
+        "lib/netstandard2.0/EasyCompressor.LZ4.dll",
+        "lib/netstandard2.0/EasyCompressor.LZ4.xml",
+        "lib/netstandard2.1/EasyCompressor.LZ4.dll",
+        "lib/netstandard2.1/EasyCompressor.LZ4.xml"
+      ]
+    },
+    "K4os.Compression.LZ4/1.3.6": {
+      "sha512": "RxGhoJBjZCgGeZgDqOP4Krs1cR9PHInbz6d2N19Dic0Y6ZACzVKbR3uSpqfEZf4RiUbHk9aiog2eS22nQPTc2A==",
+      "type": "package",
+      "path": "k4os.compression.lz4/1.3.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "k4os.compression.lz4.1.3.6.nupkg.sha512",
+        "k4os.compression.lz4.nuspec",
+        "lib/net462/K4os.Compression.LZ4.dll",
+        "lib/net462/K4os.Compression.LZ4.xml",
+        "lib/net5.0/K4os.Compression.LZ4.dll",
+        "lib/net5.0/K4os.Compression.LZ4.xml",
+        "lib/net6.0/K4os.Compression.LZ4.dll",
+        "lib/net6.0/K4os.Compression.LZ4.xml",
+        "lib/netstandard2.0/K4os.Compression.LZ4.dll",
+        "lib/netstandard2.0/K4os.Compression.LZ4.xml",
+        "lib/netstandard2.1/K4os.Compression.LZ4.dll",
+        "lib/netstandard2.1/K4os.Compression.LZ4.xml"
+      ]
+    },
+    "K4os.Compression.LZ4.Streams/1.3.6": {
+      "sha512": "lMvHa2cP7WfWxR/vREnwBmZZK/w29AnUZ/95Q91X7wcDdmlf/E8iLnkk8ahFKArHf/4FqTqZSCIUonA6tSFjgQ==",
+      "type": "package",
+      "path": "k4os.compression.lz4.streams/1.3.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "k4os.compression.lz4.streams.1.3.6.nupkg.sha512",
+        "k4os.compression.lz4.streams.nuspec",
+        "lib/net462/K4os.Compression.LZ4.Streams.dll",
+        "lib/net462/K4os.Compression.LZ4.Streams.xml",
+        "lib/net5.0/K4os.Compression.LZ4.Streams.dll",
+        "lib/net5.0/K4os.Compression.LZ4.Streams.xml",
+        "lib/net6.0/K4os.Compression.LZ4.Streams.dll",
+        "lib/net6.0/K4os.Compression.LZ4.Streams.xml",
+        "lib/netstandard2.0/K4os.Compression.LZ4.Streams.dll",
+        "lib/netstandard2.0/K4os.Compression.LZ4.Streams.xml",
+        "lib/netstandard2.1/K4os.Compression.LZ4.Streams.dll",
+        "lib/netstandard2.1/K4os.Compression.LZ4.Streams.xml"
+      ]
+    },
+    "K4os.Hash.xxHash/1.0.8": {
+      "sha512": "Wp2F7BamQ2Q/7Hk834nV9vRQapgcr8kgv9Jvfm8J3D0IhDqZMMl+a2yxUq5ltJitvXvQfB8W6K4F4fCbw/P6YQ==",
+      "type": "package",
+      "path": "k4os.hash.xxhash/1.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "k4os.hash.xxhash.1.0.8.nupkg.sha512",
+        "k4os.hash.xxhash.nuspec",
+        "lib/net462/K4os.Hash.xxHash.dll",
+        "lib/net462/K4os.Hash.xxHash.xml",
+        "lib/net5.0/K4os.Hash.xxHash.dll",
+        "lib/net5.0/K4os.Hash.xxHash.xml",
+        "lib/net6.0/K4os.Hash.xxHash.dll",
+        "lib/net6.0/K4os.Hash.xxHash.xml",
+        "lib/netstandard2.0/K4os.Hash.xxHash.dll",
+        "lib/netstandard2.0/K4os.Hash.xxHash.xml",
+        "lib/netstandard2.1/K4os.Hash.xxHash.dll",
+        "lib/netstandard2.1/K4os.Hash.xxHash.xml"
+      ]
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "sha512": "cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+      "type": "package",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Raylib-CSharp-Vinculum/5.0.1": {
+      "sha512": "g21BSSFWohdtUohpo3PW7ZHt7EGZ1+qssg3uWoHy5cnJtsPNNoMjzeyX+xOGM6HEi3JhlzPZFJ2+qojuFPXP5A==",
+      "type": "package",
+      "path": "raylib-csharp-vinculum/5.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.1/Raylib-CSharp-Vinculum.dll",
+        "lib/netstandard2.1/Raylib-CSharp-Vinculum.xml",
+        "raylib-csharp-vinculum.5.0.1.nupkg.sha512",
+        "raylib-csharp-vinculum.nuspec",
+        "raylib-csharp-vinculum_logo_256x256.png",
+        "runtimes/linux-x64/native/libraylib.so",
+        "runtimes/win-x64/native/raylib.dll",
+        "runtimes/win-x64/native/raylib.exp",
+        "runtimes/win-x64/native/raylib.lib",
+        "runtimes/win-x64/native/raylib.pdb"
+      ]
+    },
+    "System.IO.Pipelines/6.0.3": {
+      "sha512": "ryTgF+iFkpGZY1vRQhfCzX0xTdlV3pyaTTqRu2ETbEv+HlV7O6y7hyQURnghNIXvctl5DuZ//Dpks6HdL/Txgw==",
+      "type": "package",
+      "path": "system.io.pipelines/6.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.IO.Pipelines.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.IO.Pipelines.dll",
+        "lib/net461/System.IO.Pipelines.xml",
+        "lib/net6.0/System.IO.Pipelines.dll",
+        "lib/net6.0/System.IO.Pipelines.xml",
+        "lib/netcoreapp3.1/System.IO.Pipelines.dll",
+        "lib/netcoreapp3.1/System.IO.Pipelines.xml",
+        "lib/netstandard2.0/System.IO.Pipelines.dll",
+        "lib/netstandard2.0/System.IO.Pipelines.xml",
+        "system.io.pipelines.6.0.3.nupkg.sha512",
+        "system.io.pipelines.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "IronZIP >= 2024.9.3"
+      "EasyCompressor.LZ4 >= 2.0.2",
+      "Raylib-CSharp-Vinculum >= 5.0.1"
     ]
   },
   "packageFolders": {
@@ -88,9 +433,13 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "IronZIP": {
+          "EasyCompressor.LZ4": {
             "target": "Package",
-            "version": "[2024.9.3, )"
+            "version": "[2.0.2, )"
+          },
+          "Raylib-CSharp-Vinculum": {
+            "target": "Package",
+            "version": "[5.0.1, )"
           }
         },
         "imports": [
@@ -109,7 +458,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -45,9 +45,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "IronZIP": {
+            "EasyCompressor.LZ4": {
               "target": "Package",
-              "version": "[2024.9.3, )"
+              "version": "[2.0.2, )"
+            },
+            "Raylib-CSharp-Vinculum": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             }
           },
           "imports": [
@@ -66,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

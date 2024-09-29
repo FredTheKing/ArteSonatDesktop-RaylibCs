@@ -8,17 +8,125 @@
     ".NETCoreApp,Version=v8.0": {
       "ResourcesGenerator/1.0.0": {
         "dependencies": {
-          "IronZIP": "2024.9.3"
+          "EasyCompressor.LZ4": "2.0.2",
+          "Raylib-CSharp-Vinculum": "5.0.1"
         },
         "runtime": {
           "ResourcesGenerator.dll": {}
         }
       },
-      "IronZIP/2024.9.3": {
+      "CommunityToolkit.HighPerformance/8.1.0": {
         "runtime": {
-          "lib/netstandard2.0/IronZip.dll": {
-            "assemblyVersion": "2024.9.0.3",
-            "fileVersion": "2024.9.0.3"
+          "lib/net7.0/CommunityToolkit.HighPerformance.dll": {
+            "assemblyVersion": "8.1.0.0",
+            "fileVersion": "8.1.0.1"
+          }
+        }
+      },
+      "EasyCompressor/2.0.2": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/EasyCompressor.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "EasyCompressor.LZ4/2.0.2": {
+        "dependencies": {
+          "EasyCompressor": "2.0.2",
+          "K4os.Compression.LZ4": "1.3.6",
+          "K4os.Compression.LZ4.Streams": "1.3.6"
+        },
+        "runtime": {
+          "lib/net8.0/EasyCompressor.LZ4.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "K4os.Compression.LZ4/1.3.6": {
+        "runtime": {
+          "lib/net6.0/K4os.Compression.LZ4.dll": {
+            "assemblyVersion": "1.3.6.0",
+            "fileVersion": "1.3.6.0"
+          }
+        }
+      },
+      "K4os.Compression.LZ4.Streams/1.3.6": {
+        "dependencies": {
+          "K4os.Compression.LZ4": "1.3.6",
+          "K4os.Hash.xxHash": "1.0.8",
+          "System.IO.Pipelines": "6.0.3"
+        },
+        "runtime": {
+          "lib/net6.0/K4os.Compression.LZ4.Streams.dll": {
+            "assemblyVersion": "1.3.6.0",
+            "fileVersion": "1.3.6.0"
+          }
+        }
+      },
+      "K4os.Hash.xxHash/1.0.8": {
+        "runtime": {
+          "lib/net6.0/K4os.Hash.xxHash.dll": {
+            "assemblyVersion": "1.0.8.0",
+            "fileVersion": "1.0.8.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "Raylib-CSharp-Vinculum/5.0.1": {
+        "dependencies": {
+          "CommunityToolkit.HighPerformance": "8.1.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Raylib-CSharp-Vinculum.dll": {
+            "assemblyVersion": "5.0.1.0",
+            "fileVersion": "5.0.1.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libraylib.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/raylib.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/raylib.exp": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/raylib.lib": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/raylib.pdb": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "System.IO.Pipelines/6.0.3": {
+        "runtime": {
+          "lib/net6.0/System.IO.Pipelines.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.522.21309"
           }
         }
       }
@@ -30,12 +138,68 @@
       "serviceable": false,
       "sha512": ""
     },
-    "IronZIP/2024.9.3": {
+    "CommunityToolkit.HighPerformance/8.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lTk/FaS1eXbQ9fxJFosx+wrRdyS0AUnGciflJG7QjQ7whr9BmuUDJM8iZ2mijTRw/tKhovhWFkRtdSGvNuxZYw==",
-      "path": "ironzip/2024.9.3",
-      "hashPath": "ironzip.2024.9.3.nupkg.sha512"
+      "sha512": "sha512-kgDi65k02hrgnHy3N0xENecsr0spW13RdIA1tipovi9t16gKziI7uZIu3qkxz0GctCHNM4hfeqXYg//6wHJ6Kw==",
+      "path": "communitytoolkit.highperformance/8.1.0",
+      "hashPath": "communitytoolkit.highperformance.8.1.0.nupkg.sha512"
+    },
+    "EasyCompressor/2.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5lf5euWbDl+Xuer0kDL3NGUwcYXlANAiaThfYaqXbkdvm6cfZcr12SnmUN4Ksme3fHeCeBB4ZYxbKT3TwBimlA==",
+      "path": "easycompressor/2.0.2",
+      "hashPath": "easycompressor.2.0.2.nupkg.sha512"
+    },
+    "EasyCompressor.LZ4/2.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-izblFqdRJdu8nYMFgQcH8aj/gcfQ7XM8UbUiLkjEnJnOjh7GcjFZ4D1K+fiHL5CROVAf7FPi1l6NQe+61SWJbA==",
+      "path": "easycompressor.lz4/2.0.2",
+      "hashPath": "easycompressor.lz4.2.0.2.nupkg.sha512"
+    },
+    "K4os.Compression.LZ4/1.3.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RxGhoJBjZCgGeZgDqOP4Krs1cR9PHInbz6d2N19Dic0Y6ZACzVKbR3uSpqfEZf4RiUbHk9aiog2eS22nQPTc2A==",
+      "path": "k4os.compression.lz4/1.3.6",
+      "hashPath": "k4os.compression.lz4.1.3.6.nupkg.sha512"
+    },
+    "K4os.Compression.LZ4.Streams/1.3.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lMvHa2cP7WfWxR/vREnwBmZZK/w29AnUZ/95Q91X7wcDdmlf/E8iLnkk8ahFKArHf/4FqTqZSCIUonA6tSFjgQ==",
+      "path": "k4os.compression.lz4.streams/1.3.6",
+      "hashPath": "k4os.compression.lz4.streams.1.3.6.nupkg.sha512"
+    },
+    "K4os.Hash.xxHash/1.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Wp2F7BamQ2Q/7Hk834nV9vRQapgcr8kgv9Jvfm8J3D0IhDqZMMl+a2yxUq5ltJitvXvQfB8W6K4F4fCbw/P6YQ==",
+      "path": "k4os.hash.xxhash/1.0.8",
+      "hashPath": "k4os.hash.xxhash.1.0.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Raylib-CSharp-Vinculum/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-g21BSSFWohdtUohpo3PW7ZHt7EGZ1+qssg3uWoHy5cnJtsPNNoMjzeyX+xOGM6HEi3JhlzPZFJ2+qojuFPXP5A==",
+      "path": "raylib-csharp-vinculum/5.0.1",
+      "hashPath": "raylib-csharp-vinculum.5.0.1.nupkg.sha512"
+    },
+    "System.IO.Pipelines/6.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ryTgF+iFkpGZY1vRQhfCzX0xTdlV3pyaTTqRu2ETbEv+HlV7O6y7hyQURnghNIXvctl5DuZ//Dpks6HdL/Txgw==",
+      "path": "system.io.pipelines/6.0.3",
+      "hashPath": "system.io.pipelines.6.0.3.nupkg.sha512"
     }
   }
 }
