@@ -1,4 +1,5 @@
 using ImGuiNET;
+using Raylib_cs;
 using RaylibCsTemplate.Packages.Registry;
 using rlImGui_cs;
 
@@ -14,15 +15,15 @@ public class DebuggerWindow(Registry registry)
     {
       ImGui.BeginGroup();
       ImGui.SeparatorText("Info");
-      ImGui.TextUnformatted("Scene: " + registry.GetSceneManager().GetCurrentScene().GetName());
-      ImGui.EndGroup();
-      
-      ImGui.BeginGroup();
-      ImGui.SeparatorText("Scenes");
-      foreach (String scene_name in registry.GetSceneManager().GetScenesNamesList())
+      ImGui.TextUnformatted("Scene: ");
+      ImGui.SameLine();
+      string[] scenes = registry.GetSceneManager().GetScenesNamesList();
+      int current_scene_index = Array.IndexOf(scenes, registry.GetSceneManager().GetCurrentScene().GetName());
+      if (ImGui.Combo("##Scene Selector", ref current_scene_index, scenes, scenes.Length))
       {
-        if (ImGui.Button(scene_name)) registry.GetSceneManager().ChangeScene(scene_name);
+        registry.GetSceneManager().ChangeScene(scenes[current_scene_index]);
       }
+      ImGui.TextUnformatted("FPS: " + Raylib.GetFPS());
       ImGui.EndGroup();
     }
     

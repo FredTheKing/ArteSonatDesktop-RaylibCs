@@ -12,7 +12,7 @@ public class GlobalSceneOverlay(Registry registry)
     
   public void Update()
   {
-    if (registry.GetShortcutManager().IsKeyPressed(KeyboardKey.D) && registry.GetShortcutManager().IsKeyDown(KeyboardKey.LeftControl)) registry.SwitchDebugMode();
+    if (registry.GetShortcutManager().IsKeyPressed(KeyboardKey.F3)) registry.SwitchDebugMode();
   }
     
   public void Draw()
