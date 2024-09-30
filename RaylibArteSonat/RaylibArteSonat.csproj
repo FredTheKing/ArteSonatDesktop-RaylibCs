@@ -10,16 +10,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Raylib-CSharp-Vinculum" Version="5.0.1" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Source\Packages\Objects\Animation\" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Resources\photo_2024-04-13_09-33-43.jpg" />
       <None Remove="Resources\photo.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ImGui.NET" Version="1.91.0.1" />
+      <PackageReference Include="Raylib-cs" Version="6.1.1" />
+      <PackageReference Include="rlImgui-cs" Version="2.1.0" />
     </ItemGroup>
 
 </Project>

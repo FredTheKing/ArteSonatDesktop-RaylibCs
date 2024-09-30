@@ -1,5 +1,5 @@
 using System.Numerics;
-using ZeroElectric.Vinculum;
+using Raylib_cs;
 
 namespace RaylibCsTemplate.Packages.Objects.Image;
 
@@ -13,7 +13,7 @@ public class ResizableImage(string filename, Vector2 position, Vector2 size) : S
     this._size = size;
   }
 
-  public void Load()
+  public new void Load()
   {
     var image = Raylib.LoadImage(this._filename);
     unsafe

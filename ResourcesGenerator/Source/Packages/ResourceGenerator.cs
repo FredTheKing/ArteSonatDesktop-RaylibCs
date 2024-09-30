@@ -1,6 +1,6 @@
 using System.Text;
 using EasyCompressor;
-using ZeroElectric.Vinculum;
+using Raylib_cs;
 
 namespace ResourcesGenerator.Source.Packages;
 

@@ -1,33 +1,30 @@
 using System.Numerics;
 using RaylibCsharpTest.Source.Packages.Objects.Module;
-using ZeroElectric.Vinculum;
-
+using Raylib_cs;
 namespace RaylibCsTemplate.Packages.Objects.Image;
 
 public class SimpleImage(string filename, Vector2 position) : ObjectTemplate
 {
   protected string _filename = filename;
-  protected ZeroElectric.Vinculum.Image _image;
-  protected Texture _texture;
+  protected Raylib_cs.Image _image;
+  protected Texture2D _texture;
   protected Vector2 _position = position;
 
-  public void Unload()
+  public new void Unload()
   {
     Raylib.UnloadImage(this._image);
     Raylib.UnloadTexture(this._texture);
-    
-    Raylib.GetDroppedFilesAndClear();
   }
   
-  public void Load()
+  public new void Load()
   {
     this._image = Raylib.LoadImage(_filename);
     this.UpdateTexture();
   }
   
-  public void Draw()
+  public new void Draw()
   {
-    Raylib.DrawTexture(this._texture, (int)this._position.X, (int)this._position.Y, Raylib.WHITE);
+    Raylib.DrawTexture(this._texture, (int)this._position.X, (int)this._position.Y, Color.White);
   }
   
   public void UpdateTexture()

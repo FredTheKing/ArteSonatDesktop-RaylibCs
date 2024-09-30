@@ -1,18 +1,16 @@
-using ZeroElectric.Vinculum;
+using Raylib_cs;
 
 namespace RaylibCsTemplate.Packages.Objects.Etc;
 
 public class ShortcutManager
 {
-  private KeyboardKey _pressed_key;
-  
-  public KeyboardKey GetPressedKey()
+  public bool IsKeyPressed(KeyboardKey key)
   {
-    return _pressed_key;
+    return Raylib.IsKeyPressed(key);
   }
 
-  public void UpdateKey()
+  public bool IsKeyDown(KeyboardKey key)
   {
-    this._pressed_key = Raylib.GetKeyPressedAsKeyboardKey();
+    return Raylib.IsKeyDown(key);
   }
 }

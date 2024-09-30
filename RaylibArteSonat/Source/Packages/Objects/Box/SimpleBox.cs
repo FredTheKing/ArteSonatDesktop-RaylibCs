@@ -1,8 +1,6 @@
-using System.Net.Mail;
 using System.Numerics;
-using CommunityToolkit.HighPerformance.Helpers;
 using RaylibCsharpTest.Source.Packages.Objects.Module;
-using ZeroElectric.Vinculum;
+using Raylib_cs;
 namespace RaylibCsTemplate.Packages.Objects.Box;
 
 public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemplate
@@ -12,26 +10,21 @@ public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemp
 
   public Vector2 GetPosition()
   {
-    return new Vector2(this._rectangle.x, this._rectangle.y);
+    return new Vector2(this._rectangle.X, this._rectangle.Y);
   }
 
   public Vector2 GetSize()
   {
-    return new Vector2(this._rectangle.width, this._rectangle.height);;
-  }
-
-  public Color GetColor()
-  {
-    return this._color;
+    return new Vector2(this._rectangle.Width, this._rectangle.Height);;
   }
 
   public void AddPosition(Vector2 position)
   {
-    this._rectangle.x += position.X;
-    this._rectangle.y += position.Y;
+    this._rectangle.X += position.X;
+    this._rectangle.Y += position.Y;
   }
 
-  public void Draw()
+  public new void Draw()
   { 
     Raylib.DrawRectangleRec(this._rectangle, this._color);
   }

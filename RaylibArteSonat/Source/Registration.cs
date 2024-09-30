@@ -1,31 +1,33 @@
+namespace RaylibCsTemplate;
+
+using Raylib_cs;
 using RaylibCsTemplate.Packages.Objects.Image;
 using RaylibCsTemplate.Scenes;
-
-namespace RaylibCsTemplate;
 using RaylibCsTemplate.Packages.Registry;
 using System.Numerics;
 using RaylibCsTemplate.Packages.Objects.Box;
-using ZeroElectric.Vinculum;
 
 public static class Registration
 {
   public static Registry Initialisation()
   {
-    Registry registry = new Registry("TestSceneOne", "TestSceneTwo");
-    registry.AssignSceneScript("TestSceneOne", new TestSceneOne(registry));
-    registry.AssignSceneScript("TestSceneTwo", new TestSceneTwo(registry));
+    Registry registry = new Registry("Auth/Registration", "Auth/Login", "Page/Main", "Page/Search", "Page/Favourite", "Page/MyPublications", "Page/UploadSong", "Page/UploadPlaylist", "Page/Profile");
+    registry.AssignSceneScript("Auth/Registration", new Auth_Registration(registry));
+    registry.AssignSceneScript("Auth/Login", new Auth_Registration(registry));
+    registry.AssignSceneScript("Page/Main", new Page_Main(registry));
+    registry.AssignSceneScript("Page/Search", new Page_Search(registry));
+    registry.AssignSceneScript("Page/Favourite", new Page_Favourite(registry));
+    registry.AssignSceneScript("Page/MyPublications", new Page_MyPublications(registry));
+    registry.AssignSceneScript("Page/UploadSong", new Page_UploadSong(registry));
+    registry.AssignSceneScript("Page/UploadPlaylist", new Page_UploadPlaylist(registry));
+    registry.AssignSceneScript("Page/Profile", new Page_Profile(registry));
     registry.AssignGlobalScript(new GlobalSceneOverlay(registry));
+    registry.AssignGuiScript(new DebuggerWindow(registry));
     registry.SwitchDebugMode();
-
-    registry.Register("TestCodeImage", "TestSceneTwo", 0, new HitboxImage("Resources/photo.png", new Vector2(400, 100)));
     
-    registry.Register("TestImage", "TestSceneOne", 4, new ResizableImage("Resources/photo.png", new Vector2(400, 100), new Vector2(854, 480)));
+    registry.Register("LoginBox", ["Auth/Login"], [0], new SimpleBox(new Vector2(300, 300), new Vector2(500, 200), Color.Gray));
     
-    registry.Register("TestObject", "TestSceneOne", 0, new SimpleBox(new Vector2(200, 200), new Vector2(100, 100), Raylib.WHITE));
-    registry.Register("NewTestObject", "TestSceneTwo", 0, new SimpleBox(new Vector2(200, 500), new Vector2(100, 100), Raylib.WHITE));
-    
-    
-    registry.EndRegistration("TestSceneOne");
+    registry.EndRegistration("Auth/Login");
     return registry;
   }
 }

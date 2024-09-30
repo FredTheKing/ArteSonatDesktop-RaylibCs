@@ -3,6 +3,7 @@ namespace RaylibCsTemplate.Packages.Objects.Etc;
 public class SceneManager(params String[] scenes_names)
 { 
   private Dictionary<String, Scene> _scenes = InitScenes(scenes_names);
+  private String[] _scenes_names = scenes_names;
   private Scene _current_scene;
   private bool _changed = true;
 
@@ -24,22 +25,27 @@ public class SceneManager(params String[] scenes_names)
     }
   }
 
-  public void AssignScriptInstance(string name, dynamic script_class)
+  public void AssignScriptInstance(string name, dynamic script_instance)
   {
-    this._scenes[name].AssignScriptInstance(script_class);
+    this._scenes[name].AssignScriptInstance(script_instance);
   }
 
-  public void AssignGlobalScriptInstance(dynamic script_class)
+  public void AssignGlobalScriptInstance(dynamic script_instance)
   {
     foreach (Scene scene in _scenes.Values)
     {
-      scene.AssignGlobalScriptInstance(script_class);
+      scene.AssignGlobalScriptInstance(script_instance);
     }
   }
 
   public void LinkObject(Object obj, String scene_name, int z_layer)
   {
     this._scenes[scene_name].AddObject(obj, z_layer);
+  }
+
+  public String[] GetScenesNamesList()
+  {
+    return this._scenes_names;
   }
   
   public Scene GetCurrentScene()
