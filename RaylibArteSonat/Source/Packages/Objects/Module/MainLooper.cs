@@ -8,17 +8,17 @@ public static class MainLooper
   {
     if (!registry.GetSceneManager().IsChanged()) return;
     registry.GetSceneManager().ResetChanged();
-    registry.GetSceneManager().GetCurrentScene().Activation();
+    registry.GetSceneManager().GetCurrentScene().Activation(registry);
   }
   
   public static void GlobalUpdate(Registry.Registry registry)
   {
-    registry.GetSceneManager().GetCurrentScene().Update();
+    registry.GetSceneManager().GetCurrentScene().Update(registry);
   }
   
   public static void GlobalDraw(Registry.Registry registry)
   {
-    registry.GetSceneManager().GetCurrentScene().Draw();
+    registry.GetSceneManager().GetCurrentScene().Draw(registry);
     if (registry.GetDebugMode()) registry.GetGuiManager().Process();
   }
 }

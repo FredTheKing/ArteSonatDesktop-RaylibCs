@@ -7,7 +7,6 @@ public class ResizableImage(string filename, Vector2 position, Vector2 size) : S
 {
   protected Vector2 _size = size;
   
-  
   public void NewResize(Vector2 size)
   {
     this._size = size;

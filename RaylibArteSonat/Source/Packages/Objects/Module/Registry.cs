@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using RaylibArteSonat.Source.Packages.Objects.Module;
 using RaylibCsharpTest.Source.Packages.Objects.Module;
 using RaylibCsTemplate.Packages.Objects.Etc;
 using rlImGui_cs;
@@ -9,20 +10,34 @@ public class Registry(params String[] scenes_names)
 {
   private bool _debug_mode = false;
   private ShortcutManager _shortcut_manager = new ShortcutManager();
-  private SceneManager _scene_manager = new SceneManager(scenes_names);
+  private SceneManager _scene_manager = new(scenes_names);
   private GuiManager _gui_manager = new GuiManager();
-  private Dictionary<String, Object> _container = new ();
+  private Dictionary<String, Dictionary<String, Object>> _container = new();
 
   public object Register(String name, String[] scenes_names, int[] z_layers, Object obj)
   {
-      this._container.Add(name, obj);
-      for(int i = 0; i < scenes_names.Length; i++)
+    foreach (string scene_name in scenes_names)
+    {
+      if (!this._container.ContainsKey(scene_name))
       {
-        this._scene_manager.LinkObject(obj, scenes_names[i], z_layers[i]);
+        this._container.Add(scene_name, new Dictionary<String, Object>());
       }
-      return obj;
+      
+      this._container[scene_name].Add(name, obj);
+    }
+    
+    for(int i = 0; i < scenes_names.Length; i++)
+    {
+      this._scene_manager.LinkObject(obj, scenes_names[i], z_layers[i]);
+    }
+    return obj;
   }
 
+  public Dictionary<String, Dictionary<String, Object>> GetContainer()
+  {
+    return this._container; 
+  }
+  
   public dynamic Get(String name)
   {
       return this._container[name];

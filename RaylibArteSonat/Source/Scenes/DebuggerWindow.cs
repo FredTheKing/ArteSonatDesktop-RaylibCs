@@ -15,15 +15,59 @@ public class DebuggerWindow(Registry registry)
     {
       ImGui.BeginGroup();
       ImGui.SeparatorText("Info");
-      ImGui.TextUnformatted("Scene: ");
+      ImGui.Text("FPS: " + Raylib.GetFPS());
+      ImGui.Text("Scene: ");
       ImGui.SameLine();
-      string[] scenes = registry.GetSceneManager().GetScenesNamesList();
-      int current_scene_index = Array.IndexOf(scenes, registry.GetSceneManager().GetCurrentScene().GetName());
-      if (ImGui.Combo("##Scene Selector", ref current_scene_index, scenes, scenes.Length))
+      String[] array = registry.GetSceneManager().GetScenesNamesList();
+      int index = Array.IndexOf(array, registry.GetSceneManager().GetCurrentScene().GetName());
+      if (ImGui.Combo("##Scene Selector", ref index, array, array.Length))
       {
-        registry.GetSceneManager().ChangeScene(scenes[current_scene_index]);
+        registry.GetSceneManager().ChangeScene(array[index]);
       }
-      ImGui.TextUnformatted("FPS: " + Raylib.GetFPS());
+      if (ImGui.TreeNode("Objects"))
+      {
+        Dictionary<String, Dictionary<String, Object>> objects = registry.GetContainer();
+        
+        
+        if (ImGui.TreeNode("Current Scene"))
+        {
+          String current_scene_name = registry.GetSceneManager().GetCurrentScene().GetName();
+          if (objects.ContainsKey(current_scene_name))
+          {
+            foreach (KeyValuePair<String, dynamic> pair in objects[current_scene_name])
+            {
+              if (ImGui.TreeNode(pair.Key))
+              {
+                pair.Value.CallDebuggerInfo(registry);
+                ImGui.TreePop();
+              }
+            }
+          }
+          else
+          {
+            ImGui.Text("- No objects in current scene");
+          }
+          ImGui.TreePop();
+        }
+        
+        foreach (KeyValuePair<String, Dictionary<String, Object>> pair in objects)
+        {
+          if (ImGui.TreeNode(pair.Key))
+          {
+            foreach (KeyValuePair<String, dynamic> obj in pair.Value)
+            {
+              if (ImGui.TreeNode(obj.Key))
+              {
+                obj.Value.CallDebuggerInfo(registry);
+                ImGui.TreePop();
+              }
+            }
+            ImGui.TreePop();
+          }
+        }
+        ImGui.TreePop();
+      }
+      
       ImGui.EndGroup();
     }
     

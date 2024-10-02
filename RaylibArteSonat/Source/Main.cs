@@ -5,7 +5,7 @@ using Raylib_cs;
 using rlImGui_cs;
 
 Raylib.SetConfigFlags(ConfigFlags.AlwaysRunWindow | ConfigFlags.ResizableWindow);
-Raylib.InitWindow(1280, 720, "Window!");
+Raylib.InitWindow(1920, 1080, "Window!");
 Raylib.InitAudioDevice();
 Raylib.SetTargetFPS(-1);
 Registry registry = Registration.Initialisation();

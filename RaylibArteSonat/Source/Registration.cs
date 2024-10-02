@@ -25,7 +25,10 @@ public static class Registration
     registry.AssignGuiScript(new DebuggerWindow(registry));
     registry.SwitchDebugMode();
     
-    registry.Register("LoginBox", ["Auth/Login"], [0], new SimpleBox(new Vector2(300, 300), new Vector2(500, 200), Color.Gray));
+    registry.Register("LoginBox", ["Auth/Login"], [0], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Gray));
+    registry.Register("LoginBox2", ["Auth/Login"], [1], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Blue, new Vector2(100, 100)));
+
+    registry.Register("Imageee", ["Auth/Login"], [-1], new HitboxImage("photo.png", new Vector2(0, 0)));
     
     registry.EndRegistration("Auth/Login");
     return registry;

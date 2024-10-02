@@ -59,31 +59,31 @@ public class Scene(string name)
     }
   }
   
-  public void Activation()
+  public void Activation(Registry.Registry registry)
   {
     foreach (dynamic item in _sorted_list_objects)
     {
-      item.Activation();
+      item.Activation(registry);
     }
     this._script_instance.Activation();
     this._global_script_instance.Activation();
   }
   
-  public void Update()
+  public void Update(Registry.Registry registry)
   {
     foreach (dynamic item in _sorted_list_objects)
     {
-      item.Update();
+      item.Update(registry);
     }
     this._script_instance.Update();
     this._global_script_instance.Update();
   }
   
-  public void Draw()
+  public void Draw(Registry.Registry registry)
   {
     foreach (dynamic item in _sorted_list_objects)
     {
-      item.Draw();
+      item.Draw(registry);
     }
     this._script_instance.Draw();
     this._global_script_instance.Draw();
