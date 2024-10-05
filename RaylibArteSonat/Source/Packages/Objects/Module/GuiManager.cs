@@ -1,4 +1,4 @@
-namespace RaylibCsharpTest.Source.Packages.Objects.Module;
+namespace RaylibArteSonat.Source.Packages.Objects.Module;
 
 public class GuiManager
 {

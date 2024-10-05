@@ -2,7 +2,7 @@ using System.Numerics;
 using Raylib_cs;
 using RaylibArteSonat.Source.Packages.Objects.Module;
 
-namespace RaylibCsTemplate.Packages.Objects.Box;
+namespace RaylibArteSonat.Packages.Objects.Box;
 
 public class CenteredBox(Vector2 position, Vector2 size, Color color, Vector2? offset = null) : SimpleBox(position, size, color)
 {

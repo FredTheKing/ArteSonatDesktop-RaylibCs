@@ -1,10 +1,10 @@
 using System.Runtime.CompilerServices;
 using RaylibArteSonat.Source.Packages.Objects.Module;
-using RaylibCsharpTest.Source.Packages.Objects.Module;
-using RaylibCsTemplate.Packages.Objects.Etc;
+using RaylibArteSonat.Source.Packages.Objects.Module;
+using RaylibArteSonat.Packages.Objects.Etc;
 using rlImGui_cs;
 
-namespace RaylibCsTemplate.Packages.Registry;
+namespace RaylibArteSonat.Packages.Registry;
 
 public class Registry(params String[] scenes_names)
 {

@@ -2,7 +2,7 @@ using System.Numerics;
 using ImGuiNET;
 using RaylibArteSonat.Source.Packages.Objects.Module;
 using Raylib_cs;
-namespace RaylibCsTemplate.Packages.Objects.Box;
+namespace RaylibArteSonat.Packages.Objects.Box;
 
 public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemplate
 {

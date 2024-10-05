@@ -1,9 +1,9 @@
 using ImGuiNET;
 using Raylib_cs;
-using RaylibCsTemplate.Packages.Registry;
+using RaylibArteSonat.Packages.Registry;
 using rlImGui_cs;
 
-namespace RaylibCsTemplate.Scenes;
+namespace RaylibArteSonat.Scenes;
 
 public class DebuggerWindow(Registry registry)
 {

@@ -1,7 +1,7 @@
 using ImGuiNET;
 using rlImGui_cs;
 
-namespace RaylibCsTemplate.Packages.Objects.Etc;
+namespace RaylibArteSonat.Packages.Objects.Etc;
 public static class MainLooper
 {
   public static void GlobalActivation(Registry.Registry registry)

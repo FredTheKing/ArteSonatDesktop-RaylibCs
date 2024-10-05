@@ -1,8 +1,8 @@
 using System.Numerics;
-using RaylibCsTemplate.Packages.Objects.Hitbox;
+using RaylibArteSonat.Packages.Objects.Hitbox;
 using Raylib_cs;
 
-namespace RaylibCsTemplate.Packages.Objects.Image;
+namespace RaylibArteSonat.Packages.Objects.Image;
 
 public class HitboxImage(string filename, Vector2 position, Color? color = null): SimpleImage(filename, position)
 {

@@ -3,7 +3,7 @@ using ImGuiNET;
 using RaylibArteSonat.Source.Packages.Objects.Module;
 using Raylib_cs;
 
-namespace RaylibCsTemplate.Packages.Objects.Hitbox;
+namespace RaylibArteSonat.Packages.Objects.Hitbox;
 
 public class SimpleHitbox(Vector2 position, Vector2 size, Color color) : ObjectTemplate
 {

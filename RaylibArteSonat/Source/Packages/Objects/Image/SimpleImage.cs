@@ -2,7 +2,7 @@ using System.Numerics;
 using ImGuiNET;
 using RaylibArteSonat.Source.Packages.Objects.Module;
 using Raylib_cs;
-namespace RaylibCsTemplate.Packages.Objects.Image;
+namespace RaylibArteSonat.Packages.Objects.Image;
 
 public class SimpleImage(string filename, Vector2 position, Color? tint = null) : ObjectTemplate
 {

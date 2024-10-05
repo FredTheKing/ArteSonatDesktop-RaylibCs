@@ -1,11 +1,11 @@
-namespace RaylibCsTemplate;
+namespace RaylibArteSonat;
 
 using Raylib_cs;
-using RaylibCsTemplate.Packages.Objects.Image;
-using RaylibCsTemplate.Scenes;
-using RaylibCsTemplate.Packages.Registry;
+using RaylibArteSonat.Packages.Objects.Image;
+using RaylibArteSonat.Scenes;
+using RaylibArteSonat.Packages.Registry;
 using System.Numerics;
-using RaylibCsTemplate.Packages.Objects.Box;
+using RaylibArteSonat.Packages.Objects.Box;
 
 public static class Registration
 {

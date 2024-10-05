@@ -1,4 +1,4 @@
-using RaylibCsTemplate.Packages.Registry;
+using RaylibArteSonat.Packages.Registry;
 namespace RaylibArteSonat.Source.Packages.Objects.Module;
 
 public class ObjectTemplate

@@ -1,7 +1,7 @@
 using System.Numerics;
 using Raylib_cs;
 
-namespace RaylibCsTemplate.Packages.Objects.Image;
+namespace RaylibArteSonat.Packages.Objects.Image;
 
 public class ResizableImage(string filename, Vector2 position, Vector2 size) : SimpleImage(filename, position)
 {

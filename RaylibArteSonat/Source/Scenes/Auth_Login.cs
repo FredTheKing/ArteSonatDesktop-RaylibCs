@@ -1,8 +1,8 @@
 using System.Numerics;
-using RaylibCsTemplate.Packages.Registry;
+using RaylibArteSonat.Packages.Registry;
 using Raylib_cs;
 
-namespace RaylibCsTemplate.Scenes;
+namespace RaylibArteSonat.Scenes;
 public class Auth_Login(Registry registry)
 {
   public void Activation()

@@ -1,6 +1,6 @@
 using Raylib_cs;
 
-namespace RaylibCsTemplate.Packages.Objects.Etc;
+namespace RaylibArteSonat.Packages.Objects.Etc;
 
 public class ShortcutManager
 {

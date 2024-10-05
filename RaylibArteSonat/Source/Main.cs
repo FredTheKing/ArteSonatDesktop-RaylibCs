@@ -1,6 +1,6 @@
-using RaylibCsTemplate;
-using RaylibCsTemplate.Packages.Objects.Etc;
-using RaylibCsTemplate.Packages.Registry;
+using RaylibArteSonat;
+using RaylibArteSonat.Packages.Objects.Etc;
+using RaylibArteSonat.Packages.Registry;
 using Raylib_cs;
 using rlImGui_cs;
 
