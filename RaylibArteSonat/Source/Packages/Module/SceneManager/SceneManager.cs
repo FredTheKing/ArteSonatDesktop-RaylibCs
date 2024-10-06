@@ -1,4 +1,4 @@
-namespace RaylibArteSonat.Packages.Objects.Etc;
+namespace RaylibArteSonat.Source.Packages.Module;
 
 public class SceneManager(params String[] scenes_names)
 { 
@@ -17,7 +17,7 @@ public class SceneManager(params String[] scenes_names)
     return list;
   }
 
-  public void EndRegistration()
+  public void SortObjectsLayers()
   {
     foreach (Scene scene in _scenes.Values)
     {

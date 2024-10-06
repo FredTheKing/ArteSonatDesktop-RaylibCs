@@ -1,19 +1,34 @@
-namespace RaylibArteSonat;
+namespace RaylibArteSonat.Source;
 
 using Raylib_cs;
 using RaylibArteSonat.Packages.Objects.Image;
-using RaylibArteSonat.Scenes;
-using RaylibArteSonat.Packages.Registry;
+using RaylibArteSonat.Source.Packages.Module;
+using RaylibArteSonat.Source.Scenes;
 using System.Numerics;
 using RaylibArteSonat.Packages.Objects.Box;
 
 public static class Registration
 {
-  public static Registry Initialisation()
+  public static CenteredBox LoginBox;
+  public static CenteredBox LoginBox2;
+  public static HitboxImage Imageee;
+
+  public static void ObjectsInitialisation(Registry registry)
+  {
+    LoginBox = registry.Register("LoginBox", ["Auth/Login"], [0], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Gray));
+    LoginBox2 = registry.Register("LoginBox2", ["Auth/Login"], [1], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Blue, new Vector2(100, 100)));
+
+    Imageee = registry.Register("Imageee", ["Auth/Login"], [-1], new HitboxImage("photo.png", new Vector2(0, 0)));
+    
+    registry.EndObjectsRegistration();
+  }
+  
+  public static Registry RegistryInitialisation()
   {
     Registry registry = new Registry("Auth/Registration", "Auth/Login", "Page/Main", "Page/Search", "Page/Favourite", "Page/MyPublications", "Page/UploadSong", "Page/UploadPlaylist", "Page/Profile");
+    
     registry.AssignSceneScript("Auth/Registration", new Auth_Registration(registry));
-    registry.AssignSceneScript("Auth/Login", new Auth_Registration(registry));
+    registry.AssignSceneScript("Auth/Login", new Auth_Login(registry));
     registry.AssignSceneScript("Page/Main", new Page_Main(registry));
     registry.AssignSceneScript("Page/Search", new Page_Search(registry));
     registry.AssignSceneScript("Page/Favourite", new Page_Favourite(registry));
@@ -25,12 +40,7 @@ public static class Registration
     registry.AssignGuiScript(new DebuggerWindow(registry));
     registry.SwitchDebugMode();
     
-    registry.Register("LoginBox", ["Auth/Login"], [0], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Gray));
-    registry.Register("LoginBox2", ["Auth/Login"], [1], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Blue, new Vector2(100, 100)));
-
-    registry.Register("Imageee", ["Auth/Login"], [-1], new HitboxImage("photo.png", new Vector2(0, 0)));
-    
-    registry.EndRegistration("Auth/Login");
+    registry.SetStartScene("Auth/Login");
     return registry;
   }
 }

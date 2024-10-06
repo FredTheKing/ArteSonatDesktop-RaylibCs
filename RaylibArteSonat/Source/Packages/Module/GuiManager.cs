@@ -1,4 +1,4 @@
-namespace RaylibArteSonat.Source.Packages.Objects.Module;
+namespace RaylibArteSonat.Source.Packages.Module;
 
 public class GuiManager
 {

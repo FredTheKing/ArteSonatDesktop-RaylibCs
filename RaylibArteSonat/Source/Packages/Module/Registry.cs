@@ -1,10 +1,6 @@
-using System.Runtime.CompilerServices;
-using RaylibArteSonat.Source.Packages.Objects.Module;
-using RaylibArteSonat.Source.Packages.Objects.Module;
-using RaylibArteSonat.Packages.Objects.Etc;
 using rlImGui_cs;
 
-namespace RaylibArteSonat.Packages.Registry;
+namespace RaylibArteSonat.Source.Packages.Module;
 
 public class Registry(params String[] scenes_names)
 {
@@ -14,7 +10,7 @@ public class Registry(params String[] scenes_names)
   private GuiManager _gui_manager = new GuiManager();
   private Dictionary<String, Dictionary<String, Object>> _container = new();
 
-  public object Register(String name, String[] scenes_names, int[] z_layers, Object obj)
+  public dynamic Register(String name, String[] scenes_names, int[] z_layers, Object obj)
   {
     foreach (string scene_name in scenes_names)
     {
@@ -53,11 +49,15 @@ public class Registry(params String[] scenes_names)
     return this._debug_mode;
   }
   
-  public void EndRegistration(string start_scene_name)
+  public void SetStartScene(string start_scene_name)
   {
-    this._scene_manager.EndRegistration();
     this._scene_manager.ChangeScene(start_scene_name);
     rlImGui.Setup(true, true);
+  }
+  
+  public void EndObjectsRegistration()
+  {
+    this._scene_manager.SortObjectsLayers();
   }
   
   public SceneManager GetSceneManager()

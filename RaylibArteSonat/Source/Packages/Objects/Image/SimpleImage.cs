@@ -1,6 +1,6 @@
 using System.Numerics;
 using ImGuiNET;
-using RaylibArteSonat.Source.Packages.Objects.Module;
+using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 namespace RaylibArteSonat.Packages.Objects.Image;
 
@@ -12,7 +12,7 @@ public class SimpleImage(string filename, Vector2 position, Color? tint = null) 
   protected Vector2 _position = position;
   protected Color _tint = tint ?? Color.White;
 
-  public new void CallDebuggerInfo(Registry.Registry registry)
+  public new void CallDebuggerInfo(Registry registry)
   {
     ImGui.Text($"- Position: {this._position.X}, {this._position.Y}");
     ImGui.Text($"- Size: {this._image.Width}, {this._image.Height}");
@@ -42,9 +42,10 @@ public class SimpleImage(string filename, Vector2 position, Color? tint = null) 
     this.UpdateTexture();
   }
   
-  public new void Draw(Registry.Registry registry)
+  public new void Draw(Registry registry)
   {
     Raylib.DrawTexture(this._texture, (int)this._position.X, (int)this._position.Y, Color.White);
+    base.Draw(registry);
   }
   
   public void UpdateTexture()

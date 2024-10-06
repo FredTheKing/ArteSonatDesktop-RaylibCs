@@ -1,8 +1,8 @@
 using System.Numerics;
-using RaylibArteSonat.Packages.Registry;
+using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 
-namespace RaylibArteSonat.Scenes;
+namespace RaylibArteSonat.Source.Scenes;
 public class Page_Favourite(Registry registry)
 {
   public void Activation()

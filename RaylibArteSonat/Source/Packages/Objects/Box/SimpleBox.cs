@@ -1,6 +1,6 @@
 using System.Numerics;
 using ImGuiNET;
-using RaylibArteSonat.Source.Packages.Objects.Module;
+using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 namespace RaylibArteSonat.Packages.Objects.Box;
 
@@ -9,7 +9,7 @@ public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemp
   protected Rectangle _rectangle = new(position.X, position.Y, size.X, size.Y);
   protected Color _color = color;
 
-  public void CallDebuggerInfo(Registry.Registry registry)
+  public void CallDebuggerInfo(Registry registry)
   {
     ImGui.Text($"- Position: {this._rectangle.X}, {this._rectangle.Y}");
     ImGui.Text($"- Size: {this._rectangle.Width}, {this._rectangle.Height}");
@@ -43,8 +43,9 @@ public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemp
     this._rectangle.Y += position.Y;
   }
 
-  public new void Draw(Registry.Registry registry)
-  { 
+  public new void Draw(Registry registry)
+  {
     Raylib.DrawRectangleRec(this._rectangle, this._color);
+    base.Update(registry);
   }
 }

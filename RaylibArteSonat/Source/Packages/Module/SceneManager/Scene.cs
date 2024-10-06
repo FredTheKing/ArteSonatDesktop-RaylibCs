@@ -1,4 +1,4 @@
-namespace RaylibArteSonat.Packages.Objects.Etc;
+namespace RaylibArteSonat.Source.Packages.Module;
 
 public class Scene(string name)
 {
@@ -59,7 +59,7 @@ public class Scene(string name)
     }
   }
   
-  public void Activation(Registry.Registry registry)
+  public void Activation(Registry registry)
   {
     foreach (dynamic item in _sorted_list_objects)
     {
@@ -69,7 +69,7 @@ public class Scene(string name)
     this._global_script_instance.Activation();
   }
   
-  public void Update(Registry.Registry registry)
+  public void Update(Registry registry)
   {
     foreach (dynamic item in _sorted_list_objects)
     {
@@ -79,7 +79,7 @@ public class Scene(string name)
     this._global_script_instance.Update();
   }
   
-  public void Draw(Registry.Registry registry)
+  public void Draw(Registry registry)
   {
     foreach (dynamic item in _sorted_list_objects)
     {

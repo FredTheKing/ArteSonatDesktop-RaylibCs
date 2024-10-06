@@ -1,6 +1,6 @@
 using System.Numerics;
 using ImGuiNET;
-using RaylibArteSonat.Source.Packages.Objects.Module;
+using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 
 namespace RaylibArteSonat.Packages.Objects.Hitbox;
@@ -11,7 +11,7 @@ public class SimpleHitbox(Vector2 position, Vector2 size, Color color) : ObjectT
   protected Vector2 _hitbox_size = size;
   protected Color _hitbox_color = color;
 
-  public new void CallDebuggerInfo(Registry.Registry registry)
+  public new void CallDebuggerInfo(Registry registry)
   {
     if (ImGui.TreeNode("Hitbox"))
     {
@@ -38,8 +38,9 @@ public class SimpleHitbox(Vector2 position, Vector2 size, Color color) : ObjectT
     this._hitbox_size = new_size;
   }
 
-  public new void Draw(Registry.Registry registry)
+  public new void Draw(Registry registry)
   {
     Raylib.DrawRectangle((int)this._hitbox_position.X, (int)this._hitbox_position.Y, (int)this._hitbox_size.X, (int)this._hitbox_size.Y, this._hitbox_color);
+    base.Draw(registry);
   }
 }

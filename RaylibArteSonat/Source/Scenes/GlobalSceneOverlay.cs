@@ -1,7 +1,7 @@
 using Raylib_cs;
-using RaylibArteSonat.Packages.Registry;
+using RaylibArteSonat.Source.Packages.Module;
 
-namespace RaylibArteSonat.Scenes;
+namespace RaylibArteSonat.Source.Scenes;
 
 public class GlobalSceneOverlay(Registry registry)
 {
