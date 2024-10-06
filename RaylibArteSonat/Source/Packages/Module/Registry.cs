@@ -49,15 +49,11 @@ public class Registry(params String[] scenes_names)
     return this._debug_mode;
   }
   
-  public void SetStartScene(string start_scene_name)
-  {
-    this._scene_manager.ChangeScene(start_scene_name);
-    rlImGui.Setup(true, true);
-  }
-  
-  public void EndObjectsRegistration()
+  public void EndRegistration(string start_scene_name)
   {
     this._scene_manager.SortObjectsLayers();
+    this._scene_manager.ChangeScene(start_scene_name);
+    rlImGui.Setup(true, true);
   }
   
   public SceneManager GetSceneManager()

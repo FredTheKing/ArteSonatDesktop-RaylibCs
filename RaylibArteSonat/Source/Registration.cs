@@ -9,6 +9,10 @@ using RaylibArteSonat.Packages.Objects.Box;
 
 public static class Registration
 {
+
+  private static string[] scenes_names = new[] { "Auth/Registration", "Auth/Login", "Page/Main", "Page/Search", "Page/Favourite", "Page/MyPublications", "Page/UploadSong", "Page/UploadPlaylist", "Page/Profile" };
+  private static string start_scene_name = "Auth/Login";
+  
   public static CenteredBox LoginBox;
   public static CenteredBox LoginBox2;
   public static HitboxImage Imageee;
@@ -20,12 +24,12 @@ public static class Registration
 
     Imageee = registry.Register("Imageee", ["Auth/Login"], [-1], new HitboxImage("photo.png", new Vector2(0, 0)));
     
-    registry.EndObjectsRegistration();
+    registry.EndRegistration(start_scene_name);
   }
   
   public static Registry RegistryInitialisation()
   {
-    Registry registry = new Registry("Auth/Registration", "Auth/Login", "Page/Main", "Page/Search", "Page/Favourite", "Page/MyPublications", "Page/UploadSong", "Page/UploadPlaylist", "Page/Profile");
+    Registry registry = new Registry(scenes_names);
     
     registry.AssignSceneScript("Auth/Registration", new Auth_Registration(registry));
     registry.AssignSceneScript("Auth/Login", new Auth_Login(registry));
@@ -40,7 +44,6 @@ public static class Registration
     registry.AssignGuiScript(new DebuggerWindow(registry));
     registry.SwitchDebugMode();
     
-    registry.SetStartScene("Auth/Login");
     return registry;
   }
 }
