@@ -1,13 +1,13 @@
 using System.Numerics;
-using RaylibArteSonat.Packages.Objects.Hitbox;
-using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
-
-namespace RaylibArteSonat.Packages.Objects.Image;
+using RaylibArteSonat.Packages.Objects.Hitbox;
+using RaylibArteSonat.Packages.Objects.Image;
+using RaylibArteSonat.Source.Packages.Module;
+namespace RaylibArteSonat.Source.Packages.Objects.Image;
 
 public class HitboxImage(string filename, Vector2 position, Color? color = null): SimpleImage(filename, position)
 {
-  private RectangleHitbox _hitbox = new RectangleHitbox(position, new Vector2(0, 0), color ?? new Color(255, 0, 0, 123));
+  private RectangleHitbox _hitbox = new RectangleHitbox(ref position, new Vector2(0, 0), color ?? new Color(255, 0, 0, 123));
 
   public void CallDebuggerInfo(Registry registry)
   {

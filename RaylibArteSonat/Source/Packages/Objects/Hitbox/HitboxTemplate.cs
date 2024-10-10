@@ -4,8 +4,9 @@ using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 namespace RaylibArteSonat.Packages.Objects.Hitbox;
 
-public class HitboxTemplate(Vector2 position, Color color) : ObjectTemplate
+public class HitboxTemplate(ref Vector2 position, Color color) : ObjectTemplate
 {
+  
   protected Vector2 _hitbox_position = position;
   protected Color _hitbox_color = color;
   
@@ -52,30 +53,15 @@ public class HitboxTemplate(Vector2 position, Color color) : ObjectTemplate
     CheckMouseReleased();
   }
 
-  public bool GetMouseHover()
-  {
-    return _hitbox_click_hover;
-  }
+  public bool GetMouseHover() => _hitbox_click_hover;
   
-  public bool GetMousePressed(MouseButton button)
-  {
-    return _hitbox_click_press[(int)button];
-  }
+  public bool GetMousePressed(MouseButton button) => _hitbox_click_press[(int)button];
   
-  public bool GetMouseOutsidePressed(MouseButton button)
-  {
-    return _hitbox_click_outside_press[(int)button];
-  }
+  public bool GetMouseOutsidePressed(MouseButton button) => _hitbox_click_outside_press[(int)button];
+
+  public bool GetMouseHold(MouseButton button) => _hitbox_click_hold[(int)button];
   
-  public bool GetMouseHold(MouseButton button)
-  {
-    return _hitbox_click_hold[(int)button];
-  }
-  
-  public bool GetMouseReleased(MouseButton button)
-  {
-    return _hitbox_click_release[(int)button];
-  }
+  public bool GetMouseReleased(MouseButton button) => _hitbox_click_release[(int)button];
   
   public new void Update(Registry registry)
   {

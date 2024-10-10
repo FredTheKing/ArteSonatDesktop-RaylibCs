@@ -6,6 +6,7 @@ public class Registry(params String[] scenes_names)
 {
   private bool _debug_mode = false;
   public bool _show_hitboxes = true;
+  public bool _show_bounds = true;
   private ShortcutManager _shortcut_manager = new ShortcutManager();
   private SceneManager _scene_manager = new(scenes_names);
   private GuiManager _gui_manager = new GuiManager();
@@ -48,6 +49,11 @@ public class Registry(params String[] scenes_names)
   public bool GetShowHitboxes()
   {
     return _show_hitboxes;
+  }
+
+  public bool GetShowBounds()
+  {
+    return _show_bounds;
   }
   
   public bool GetDebugMode()
