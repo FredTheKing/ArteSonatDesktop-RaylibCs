@@ -14,8 +14,8 @@ public class SimpleImage(string filename, Vector2 position, Color? tint = null) 
 
   public new void CallDebuggerInfo(Registry registry)
   {
-    ImGui.Text($"- Position: {this._position.X}, {this._position.Y}");
-    ImGui.Text($"- Size: {this._image.Width}, {this._image.Height}");
+    ImGui.Text($"- Position: {_position.X}, {_position.Y}");
+    ImGui.Text($"- Size: {_image.Width}, {_image.Height}");
     
     ImGui.BeginGroup();
     ImGui.Text($"- Color:");
@@ -32,24 +32,24 @@ public class SimpleImage(string filename, Vector2 position, Color? tint = null) 
   
   public new void Unload()
   {
-    Raylib.UnloadImage(this._image);
-    Raylib.UnloadTexture(this._texture);
+    Raylib.UnloadImage(_image);
+    Raylib.UnloadTexture(_texture);
   }
   
   public new void Load()
   {
-    this._image = Raylib.LoadImage(_filename);
-    this.UpdateTexture();
+    _image = Raylib.LoadImage(_filename);
+    UpdateTexture();
   }
   
   public new void Draw(Registry registry)
   {
-    Raylib.DrawTexture(this._texture, (int)this._position.X, (int)this._position.Y, Color.White);
+    Raylib.DrawTexture(_texture, (int)_position.X, (int)_position.Y, Color.White);
     base.Draw(registry);
   }
   
   public void UpdateTexture()
   {
-    this._texture = Raylib.LoadTextureFromImage(this._image);
+    _texture = Raylib.LoadTextureFromImage(_image);
   }
 }

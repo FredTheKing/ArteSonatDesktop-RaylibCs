@@ -1,3 +1,5 @@
+using RaylibArteSonat.Source.Packages.Objects.Input;
+
 namespace RaylibArteSonat.Source;
 
 using Raylib_cs;
@@ -12,17 +14,15 @@ public static class Registration
 
   private static string[] scenes_names = new[] { "Auth/Registration", "Auth/Login", "Page/Main", "Page/Search", "Page/Favourite", "Page/MyPublications", "Page/UploadSong", "Page/UploadPlaylist", "Page/Profile" };
   private static string start_scene_name = "Auth/Login";
-  
+
   public static CenteredBox LoginBox;
-  public static CenteredBox LoginBox2;
-  public static HitboxImage Imageee;
+  public static SimpleInput LoginInputBox1;
 
   public static void ObjectsInitialisation(Registry registry)
   {
-    LoginBox = registry.Register("LoginBox", ["Auth/Login"], [0], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Gray));
-    LoginBox2 = registry.Register("LoginBox2", ["Auth/Login"], [1], new CenteredBox(new Vector2(300, 300), new Vector2(1000, 720), Color.Blue, new Vector2(100, 100)));
-
-    Imageee = registry.Register("Imageee", ["Auth/Login"], [-1], new HitboxImage("photo.png", new Vector2(0, 0)));
+    LoginBox = registry.Register("LoginBox", ["Auth/Login"], [0], new CenteredShadowBox(new Vector2(300, 300), new Vector2(600, 400), Color.White, new Color(230, 230, 230, 60), 8, new Vector2(0, -20)));
+    LoginInputBox1 = registry.Register("LoginInputBox1", ["Auth/Login"], [1], new SimpleInput(new Vector2(400, 100), new Vector2(600, 50), "Login Here"));
+    
     
     registry.EndRegistration(start_scene_name);
   }

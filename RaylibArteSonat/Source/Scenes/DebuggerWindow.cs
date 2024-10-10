@@ -24,10 +24,12 @@ public class DebuggerWindow(Registry registry)
       {
         registry.GetSceneManager().ChangeScene(array[index]);
       }
+      ImGui.Text("Show Hitboxes: ");
+      ImGui.SameLine();
+      ImGui.Checkbox("##Show Hitboxes", ref registry._show_hitboxes);
       if (ImGui.TreeNode("Objects"))
       {
         Dictionary<String, Dictionary<String, Object>> objects = registry.GetContainer();
-        
         
         if (ImGui.TreeNode("Current Scene"))
         {

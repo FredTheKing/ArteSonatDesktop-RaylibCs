@@ -14,7 +14,7 @@ public class Scene(string name)
     {
       _unsorted_dict_objects.Add(z_layer, new List<object>());
     }
-    this._unsorted_dict_objects[z_layer].Add(obj);
+    _unsorted_dict_objects[z_layer].Add(obj);
   }
 
   public List<Object> GetObjectsList()
@@ -29,12 +29,12 @@ public class Scene(string name)
 
   public void AssignScriptInstance(dynamic script_instance)
   {
-    this._script_instance = script_instance;
+    _script_instance = script_instance;
   }
 
   public void AssignGlobalScriptInstance(dynamic script_instance)
   {
-    this._global_script_instance = script_instance;
+    _global_script_instance = script_instance;
   }
 
   public void SortLayers()
@@ -65,8 +65,8 @@ public class Scene(string name)
     {
       item.Activation(registry);
     }
-    this._script_instance.Activation();
-    this._global_script_instance.Activation();
+    _script_instance.Activation();
+    _global_script_instance.Activation();
   }
   
   public void Update(Registry registry)
@@ -75,8 +75,8 @@ public class Scene(string name)
     {
       item.Update(registry);
     }
-    this._script_instance.Update();
-    this._global_script_instance.Update();
+    _script_instance.Update();
+    _global_script_instance.Update();
   }
   
   public void Draw(Registry registry)
@@ -85,7 +85,7 @@ public class Scene(string name)
     {
       item.Draw(registry);
     }
-    this._script_instance.Draw();
-    this._global_script_instance.Draw();
+    _script_instance.Draw();
+    _global_script_instance.Draw();
   }
 }

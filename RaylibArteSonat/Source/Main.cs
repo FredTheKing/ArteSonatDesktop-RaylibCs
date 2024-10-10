@@ -12,7 +12,7 @@ Registration.ObjectsInitialisation(registry);
 while (!Raylib.WindowShouldClose())
 {
   Raylib.BeginDrawing();
-  Raylib.ClearBackground(Color.Black);
+  Raylib.ClearBackground(new Color(240, 240, 240, 255));
   
   MainLooper.GlobalActivation(registry);
   MainLooper.GlobalUpdate(registry);

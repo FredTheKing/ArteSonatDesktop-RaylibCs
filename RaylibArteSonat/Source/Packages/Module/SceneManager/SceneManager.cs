@@ -27,7 +27,7 @@ public class SceneManager(params String[] scenes_names)
 
   public void AssignScriptInstance(string name, dynamic script_instance)
   {
-    this._scenes[name].AssignScriptInstance(script_instance);
+    _scenes[name].AssignScriptInstance(script_instance);
   }
 
   public void AssignGlobalScriptInstance(dynamic script_instance)
@@ -40,37 +40,37 @@ public class SceneManager(params String[] scenes_names)
 
   public void LinkObject(Object obj, String scene_name, int z_layer)
   {
-    this._scenes[scene_name].AddObject(obj, z_layer);
+    _scenes[scene_name].AddObject(obj, z_layer);
   }
 
   public String[] GetScenesNamesList()
   {
-    return this._scenes_names;
+    return _scenes_names;
   }
   
   public Scene GetCurrentScene()
   {
-    return this._current_scene;
+    return _current_scene;
   }
   
   public bool IsChanged()
   {
-    return this._changed;
+    return _changed;
   }
 
   public void ResetChanged()
   {
-    this._changed = false;
+    _changed = false;
   }
   
   public void ChangeScene(String scene_name)
   {
-    if (this._current_scene != null)
+    if (_current_scene != null)
     {
-      this._current_scene.Unload();
+      _current_scene.Unload();
     }
-    this._current_scene = this._scenes[scene_name];
-    this._changed = true;
-    this._current_scene.Load();
+    _current_scene = _scenes[scene_name];
+    _changed = true;
+    _current_scene.Load();
   }
 }

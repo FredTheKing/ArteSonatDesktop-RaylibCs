@@ -9,17 +9,17 @@ public class ResizableImage(string filename, Vector2 position, Vector2 size) : S
   
   public void NewResize(Vector2 size)
   {
-    this._size = size;
+    _size = size;
   }
 
   public new void Load()
   {
-    var image = Raylib.LoadImage(this._filename);
+    var image = Raylib.LoadImage(_filename);
     unsafe
     {
-      Raylib.ImageResize(&image, (int)this._size.X, (int)this._size.Y);
+      Raylib.ImageResize(&image, (int)_size.X, (int)_size.Y);
     }
-    this._image = image;
-    this.UpdateTexture();
+    _image = image;
+    UpdateTexture();
   }
 }

@@ -6,11 +6,11 @@ public class GuiManager
   
   public void AssignGuiScript(dynamic script_instance)
   {
-    this._script_instance = script_instance;
+    _script_instance = script_instance;
   }
   
   public void Process()
   {
-    this._script_instance.Process();
+    _script_instance.Process();
   }
 }
