@@ -25,10 +25,7 @@ public class SceneManager(params String[] scenes_names)
     }
   }
 
-  public void AssignScriptInstance(string name, dynamic script_instance)
-  {
-    _scenes[name].AssignScriptInstance(script_instance);
-  }
+  public void AssignScriptInstance(string name, dynamic script_instance) => _scenes[name].AssignScriptInstance(script_instance);
 
   public void AssignGlobalScriptInstance(dynamic script_instance)
   {
@@ -38,30 +35,17 @@ public class SceneManager(params String[] scenes_names)
     }
   }
 
-  public void LinkObject(Object obj, String scene_name, int z_layer)
-  {
-    _scenes[scene_name].AddObject(obj, z_layer);
-  }
+  public void LinkObject(Object obj, String scene_name, int z_layer) => _scenes[scene_name].AddObject(obj, z_layer);
 
-  public String[] GetScenesNamesList()
-  {
-    return _scenes_names;
-  }
-  
-  public Scene GetCurrentScene()
-  {
-    return _current_scene;
-  }
-  
-  public bool IsChanged()
-  {
-    return _changed;
-  }
+  public Dictionary<String, Scene> GetScenes() => _scenes;
 
-  public void ResetChanged()
-  {
-    _changed = false;
-  }
+  public String[] GetScenesNamesList() => _scenes_names;
+  
+  public Scene GetCurrentScene() => _current_scene;
+  
+  public bool IsChanged() => _changed;
+
+  public void ResetChanged() => _changed = false;
   
   public void ChangeScene(String scene_name)
   {

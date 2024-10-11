@@ -16,6 +16,7 @@ public class DebuggerWindow(Registry registry)
     {
       ImGui.SeparatorText("Info");
       ImGui.Text("FPS: " + Raylib.GetFPS());
+      ImGui.Text("MS: " + Raylib.GetFrameTime());
       ImGui.Text("Scene: ");
       ImGui.SameLine(ImGui.GetWindowWidth() - 182);
       String[] array = registry.GetSceneManager().GetScenesNamesList();
@@ -45,27 +46,69 @@ public class DebuggerWindow(Registry registry)
       ImGui.Text("Show Bounds: ");
       ImGui.SameLine(ImGui.GetWindowWidth() - 27);
       ImGui.Checkbox("##Show Bounds", ref registry._show_bounds);
-
-      ImGui.SeparatorText("Objects");
+      
+      String current_scene_name = registry.GetSceneManager().GetCurrentScene().GetName();
+      ImGui.SeparatorText("Resources");
       Dictionary<String, Dictionary<String, Object>> objects = registry.GetContainer();
-
+      Dictionary<String, Dictionary<String, Dictionary<String, Object>>> materials = registry.GetResourcesManager().GetStorage();
+      
       if (ImGui.TreeNode("Current Scene"))
       {
-        String current_scene_name = registry.GetSceneManager().GetCurrentScene().GetName();
         if (objects.ContainsKey(current_scene_name))
         {
-          foreach (KeyValuePair<String, dynamic> pair in objects[current_scene_name])
+          if (materials.ContainsKey(current_scene_name))
           {
-            if (ImGui.TreeNode(pair.Key))
+            if (ImGui.TreeNode("Objects"))
             {
-              pair.Value.CallDebuggerInfo(registry);
+              foreach (KeyValuePair<String, dynamic> pair in objects[current_scene_name])
+              {
+                if (ImGui.TreeNode(pair.Key))
+                {
+                  pair.Value.CallDebuggerInfo(registry);
+                  ImGui.TreePop();
+                }
+              }
+              ImGui.TreePop();
+            }
+            if (ImGui.TreeNode("Materials"))
+            {
+              foreach (KeyValuePair<String, Dictionary<String, Object>> pair in materials[current_scene_name])
+              {
+                if (ImGui.TreeNode(pair.Key))
+                {
+                  foreach (KeyValuePair<String, dynamic> mat in pair.Value)
+                  {
+                    if (ImGui.TreeNode(mat.Key))
+                    {
+                      mat.Value.CallDebuggerInfo(registry);
+                      ImGui.TreePop();
+                    }
+                  }
+                  ImGui.TreePop();
+                }
+              }
+              ImGui.TreePop();
+            }
+          }
+          else
+          {
+            if (ImGui.TreeNode("Objects"))
+            {
+              foreach (KeyValuePair<String, dynamic> pair in objects[current_scene_name])
+              {
+                if (ImGui.TreeNode(pair.Key))
+                {
+                  pair.Value.CallDebuggerInfo(registry);
+                  ImGui.TreePop();
+                }
+              }
               ImGui.TreePop();
             }
           }
         }
         else
         {
-          ImGui.Text("- No objects in current scene");
+          ImGui.Text("- No objects or materials in current scene");
         }
 
         ImGui.TreePop();
@@ -73,22 +116,65 @@ public class DebuggerWindow(Registry registry)
 
       foreach (KeyValuePair<String, Dictionary<String, Object>> pair in objects)
       {
-        if (ImGui.TreeNode(pair.Key))
+        if (materials.ContainsKey(pair.Key))
         {
-          foreach (KeyValuePair<String, dynamic> obj in pair.Value)
+          if (ImGui.TreeNode(pair.Key))
           {
-            if (ImGui.TreeNode(obj.Key))
+            if (ImGui.TreeNode("Objects"))
             {
-              obj.Value.CallDebuggerInfo(registry);
+              foreach (KeyValuePair<String, dynamic> obj in pair.Value)
+              {
+                if (ImGui.TreeNode(obj.Key))
+                {
+                  obj.Value.CallDebuggerInfo(registry);
+                  ImGui.TreePop();
+                }
+              }
               ImGui.TreePop();
             }
+            if (ImGui.TreeNode("Materials"))
+            {
+              foreach (KeyValuePair<String, Dictionary<String, Object>> type in materials[pair.Key])
+              {
+                if (ImGui.TreeNode(type.Key))
+                {
+                  foreach (KeyValuePair<String, dynamic> mat in type.Value)
+                  {
+                    if (ImGui.TreeNode(mat.Key))
+                    {
+                      mat.Value.CallDebuggerInfo(registry);
+                      ImGui.TreePop();
+                    }
+                  }
+                  ImGui.TreePop();
+                }
+              }
+              ImGui.TreePop();
+            }
+            ImGui.TreePop();
           }
-
-          ImGui.TreePop();
+        }
+        else
+        {
+          if (ImGui.TreeNode(pair.Key))
+          {
+            if (ImGui.TreeNode("Objects"))
+            {
+              foreach (KeyValuePair<String, dynamic> obj in pair.Value)
+              {
+                if (ImGui.TreeNode(obj.Key))
+                {
+                  obj.Value.CallDebuggerInfo(registry);
+                  ImGui.TreePop();
+                }
+              }
+              ImGui.TreePop();
+            }
+            ImGui.TreePop();
+          }
         }
       }
     }
-
 
     ImGui.End();
     rlImGui.End();

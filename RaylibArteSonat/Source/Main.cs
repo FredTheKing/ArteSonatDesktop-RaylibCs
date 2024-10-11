@@ -8,6 +8,7 @@ Raylib.InitWindow(1920, 1080, "Window!");
 Raylib.InitAudioDevice();
 Raylib.SetTargetFPS(-1);
 Registry registry = Registration.RegistryInitialisation();
+Registration.MaterialsInitialisation(registry);
 Registration.ObjectsInitialisation(registry);
 while (!Raylib.WindowShouldClose())
 {

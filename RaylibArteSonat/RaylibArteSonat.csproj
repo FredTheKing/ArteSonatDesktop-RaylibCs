@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Resources\Font\" />
       <Folder Include="Source\Packages\Objects\Animation\" />
     </ItemGroup>
 
@@ -21,6 +22,21 @@
       <PackageReference Include="ImGui.NET" Version="1.91.0.1" />
       <PackageReference Include="Raylib-cs" Version="6.1.1" />
       <PackageReference Include="rlImgui-cs" Version="2.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Font\consolas.ttf" />
+      <Content Include="Resources\Font\consolas.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Font\lcd.ttf" />
+      <Content Include="Resources\Font\lcd.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Font\regular.ttf" />
+      <Content Include="Resources\Font\regular.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

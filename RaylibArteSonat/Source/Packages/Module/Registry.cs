@@ -1,3 +1,4 @@
+using Raylib_cs;
 using rlImGui_cs;
 
 namespace RaylibArteSonat.Source.Packages.Module;
@@ -7,14 +8,32 @@ public class Registry(params String[] scenes_names)
   private bool _debug_mode = false;
   public bool _show_hitboxes = true;
   public bool _show_bounds = true;
-  private ShortcutManager _shortcut_manager = new ShortcutManager();
-  private SceneManager _scene_manager = new(scenes_names);
-  private GuiManager _gui_manager = new GuiManager();
+  
+  private readonly ShortcutManager _shortcut_manager = new();
+  private readonly SceneManager _scene_manager = new(scenes_names);
+  private readonly GuiManager _gui_manager = new();
+  private readonly ResourcesManager _resources_manager = new(scenes_names);
+  
   private Dictionary<String, Dictionary<String, Object>> _container = new();
 
-  public dynamic Register(String name, String[] scenes_names, int[] z_layers, Object obj)
+  public dynamic RegisterObject(String name, String[] scenes_names, int[] z_layers, dynamic obj)
   {
+    List<string> target_scenes = new();
+    
     foreach (string scene_name in scenes_names)
+    {
+      if (scene_name == "*")
+      {
+        target_scenes.AddRange(_scene_manager.GetScenes().Keys);
+        break;
+      }
+      else
+      {
+        target_scenes.Add(scene_name);
+      }
+    }
+    
+    foreach (string scene_name in target_scenes)
     {
       if (!_container.ContainsKey(scene_name))
       {
@@ -24,77 +43,80 @@ public class Registry(params String[] scenes_names)
       _container[scene_name].Add(name, obj);
     }
     
-    for(int i = 0; i < scenes_names.Length; i++)
+    for(int i = 0; i < target_scenes.Count; i++)
     {
-      _scene_manager.LinkObject(obj, scenes_names[i], z_layers[i]);
+      _scene_manager.LinkObject(obj, target_scenes[i], z_layers[i % z_layers.Length]);
     }
     return obj;
   }
-
-  public Dictionary<String, Dictionary<String, Object>> GetContainer()
+  
+  public FontResource RegisterFont(String name, String[] scenes_names, FontResource mat)
   {
-    return _container; 
+    List<string> target_scenes = new();
+    
+    foreach (string scene_name in scenes_names)
+    {
+      if (scene_name == "*")
+      {
+        target_scenes.AddRange(_scene_manager.GetScenes().Keys);
+        break;
+      }
+      else
+      {
+        target_scenes.Add(scene_name);
+      }
+    }
+    
+    foreach (string scene_name in target_scenes)
+    {
+      _resources_manager.AddFont(scene_name, name, mat);
+    }
+
+    return mat;
+  }
+
+  public Dictionary<String, Dictionary<String, Object>> GetContainer() => _container; 
+  
+  public dynamic Get(String name) => _container[name];
+
+  public void SwitchDebugMode() => _debug_mode = !_debug_mode;
+
+  public bool GetShowHitboxes() => _show_hitboxes;
+
+  public bool GetShowBounds() => _show_bounds;
+  
+  public bool GetDebugMode() => _debug_mode;
+
+  public void EndMaterialsRegistration()
+  {
+    foreach (KeyValuePair<String, Scene> scene_pair in GetSceneManager().GetScenes())
+    {
+      if (GetResourcesManager().GetStorage().ContainsKey(scene_pair.Key)) 
+        scene_pair.Value.AssignResources(GetResourcesManager().GetStorage()[scene_pair.Key]);
+    }
   }
   
-  public dynamic Get(String name)
-  {
-      return _container[name];
-  }
-
-  public void SwitchDebugMode()
-  {
-    _debug_mode = !_debug_mode;
-  }
-
-  public bool GetShowHitboxes()
-  {
-    return _show_hitboxes;
-  }
-
-  public bool GetShowBounds()
-  {
-    return _show_bounds;
-  }
-  
-  public bool GetDebugMode()
-  {
-    return _debug_mode;
-  }
-  
-  public void EndRegistration(string start_scene_name)
+  public void EndObjectsRegistration(string start_scene_name)
   {
     _scene_manager.SortObjectsLayers();
     _scene_manager.ChangeScene(start_scene_name);
     rlImGui.Setup(true, true);
   }
   
-  public SceneManager GetSceneManager()
-  {
-    return _scene_manager;
-  }
+  public SceneManager GetSceneManager() => _scene_manager;
   
-  public GuiManager GetGuiManager()
-  {
-    return _gui_manager;
-  }
+  public GuiManager GetGuiManager() => _gui_manager;
 
-  public ShortcutManager GetShortcutManager()
-  {
-    return _shortcut_manager;
-  }
+  public ShortcutManager GetShortcutManager() => _shortcut_manager;
+  
+  public ResourcesManager GetResourcesManager() => _resources_manager;
 
-  public void AssignSceneScript(string scene_name, dynamic script_instance)
-  {
+  public void AssignSceneScript(string scene_name, dynamic script_instance) => 
     _scene_manager.AssignScriptInstance(scene_name, script_instance);
-  }
   
-  public void AssignGlobalScript(dynamic script_instance)
-  {
+  public void AssignGlobalScript(dynamic script_instance) =>
     _scene_manager.AssignGlobalScriptInstance(script_instance);
-  }
   
-  public void AssignGuiScript(dynamic script_instance)
-  {
+  public void AssignGuiScript(dynamic script_instance) =>
     _gui_manager.AssignGuiScript(script_instance);
-  }
 }

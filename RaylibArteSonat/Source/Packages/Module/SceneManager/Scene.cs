@@ -1,8 +1,11 @@
+using System.Runtime.InteropServices.JavaScript;
+
 namespace RaylibArteSonat.Source.Packages.Module;
 
 public class Scene(string name)
 {
   private string _name = name;
+  private Dictionary<String, Dictionary<String, dynamic>> _resources_dictionary = new();
   private Dictionary<int, List<Object>> _unsorted_dict_objects = new();
   private List<Object> _sorted_list_objects = new();
   private dynamic _script_instance;
@@ -17,25 +20,15 @@ public class Scene(string name)
     _unsorted_dict_objects[z_layer].Add(obj);
   }
 
-  public List<Object> GetObjectsList()
-  {
-    return _sorted_list_objects;
-  }
+  public void AssignResources(Dictionary<String, Dictionary<String, dynamic>> resources_dictionary) => _resources_dictionary = resources_dictionary;
 
-  public string GetName()
-  {
-    return _name;
-  }
+  public List<Object> GetObjectsList() => _sorted_list_objects;
 
-  public void AssignScriptInstance(dynamic script_instance)
-  {
-    _script_instance = script_instance;
-  }
+  public string GetName() => _name;
 
-  public void AssignGlobalScriptInstance(dynamic script_instance)
-  {
-    _global_script_instance = script_instance;
-  }
+  public void AssignScriptInstance(dynamic script_instance) => _script_instance = script_instance;
+
+  public void AssignGlobalScriptInstance(dynamic script_instance) => _global_script_instance = script_instance;
 
   public void SortLayers()
   {
@@ -45,6 +38,13 @@ public class Scene(string name)
 
   public void Unload()
   {
+    foreach (KeyValuePair<string,Dictionary<string,dynamic>> type_pair in _resources_dictionary)
+    {
+      foreach (KeyValuePair<string,dynamic> object_pair in type_pair.Value)
+      {
+        object_pair.Value.Unload();
+      }
+    }
     foreach (dynamic item in _sorted_list_objects)
     {
       item.Unload();
@@ -53,6 +53,13 @@ public class Scene(string name)
   
   public void Load()
   {
+    foreach (KeyValuePair<string,Dictionary<string,dynamic>> type_pair in _resources_dictionary)
+    {
+      foreach (KeyValuePair<string,dynamic> object_pair in type_pair.Value)
+      {
+        object_pair.Value.Load();
+      }
+    }
     foreach (dynamic item in _sorted_list_objects)
     {
       item.Load();

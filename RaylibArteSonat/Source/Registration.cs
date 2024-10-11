@@ -13,19 +13,34 @@ public static class Registration
 
   private static string[] scenes_names = new[] { "TestingScene", "Auth/Registration", "Auth/Login", "Page/Main", "Page/Search", "Page/Favourite", "Page/MyPublications", "Page/UploadSong", "Page/UploadPlaylist", "Page/Profile" };
   private static string start_scene_name = "Auth/Login";
+  
+  public static class Materials
+  {
+    public static FontResource Global_Font;
+  }
+  
+  public static class Objects
+  {
+    public static CenteredBox Auth_Login_Box;
+    public static SimpleInput Auth_Login_LoginInput;
+    public static SimpleText TestingScene_TestText;
+  }
+  
+  public static void MaterialsInitialisation(Registry registry)
+  {
+    Materials.Global_Font = registry.RegisterFont("GlobalFont", ["*"], new FontResource("Resources/Font/consolas.ttf"));
 
-  public static CenteredBox Auth_Login_Box;
-  public static SimpleInput Auth_Login_LoginInput;
-  public static SimpleText TestingScene_TestText;
+    registry.EndMaterialsRegistration();
+  }
 
   public static void ObjectsInitialisation(Registry registry)
   {
-    Auth_Login_Box = registry.Register("Box", ["Auth/Login"], [0], new CenteredShadowBox(new Vector2(300, 300), new Vector2(600, 400), Color.White, new Color(230, 230, 230, 60), 8, new Vector2(0, -20)));
-    Auth_Login_LoginInput = registry.Register("LoginInput", ["Auth/Login"], [1], new SimpleInput(new Vector2(400, 100), new Vector2(600, 50), 3, 24, "Login Here"));
+    Objects.Auth_Login_Box = registry.RegisterObject("Box", ["Auth/Login"], [0], new CenteredShadowBox(new Vector2(0, 0), new Vector2(600, 400), Color.White, new Color(230, 230, 230, 60), 8, new Vector2(0, -20)));
+    Objects.Auth_Login_LoginInput = registry.RegisterObject("LoginInput", ["Auth/Login"], [1], new SimpleInput(new Vector2(600, 100), new Vector2(600, 50), 3, 24, Materials.Global_Font, "Login Here"));
     
-    TestingScene_TestText = registry.Register("TestText", ["TestingScene"], [0], new SimpleText(new Vector2(400, 300), new Vector2(300, 50), "DEFAULT TEXT!!", Color.Black));
+    Objects.TestingScene_TestText = registry.RegisterObject("TestText", ["TestingScene"], [0], new SimpleText(new Vector2(600, 300), new Vector2(300, 50), 18, "DEFAULT TEXT!!", Color.Black, true, true));
     
-    registry.EndRegistration(start_scene_name);
+    registry.EndObjectsRegistration(start_scene_name);
   }
   
   public static Registry RegistryInitialisation()

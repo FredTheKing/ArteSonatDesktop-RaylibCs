@@ -1,5 +1,4 @@
 using ImGuiNET;
-
 namespace RaylibArteSonat.Source.Packages.Module;
 
 public class ObjectTemplate
