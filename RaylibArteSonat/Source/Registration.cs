@@ -35,7 +35,7 @@ public static class Registration
 
   public static void ObjectsInitialisation(Registry registry)
   {
-    Objects.Auth_Login_Box = registry.RegisterObject("Box", ["Auth/Login"], [0], new CenteredShadowBox(new Vector2(0, 0), new Vector2(600, 400), Color.White, new Color(230, 230, 230, 60), 8, new Vector2(0, -20)));
+    Objects.Auth_Login_Box = registry.RegisterObject("Box", ["Auth/Login"], [0], new CenteredShadowBox(new Vector2(0, -20), new Vector2(600, 400), Color.White, new Color(230, 230, 230, 60), 8));
     Objects.Auth_Login_LoginInput = registry.RegisterObject("LoginInput", ["Auth/Login"], [1], new SimpleInput(new Vector2(600, 100), new Vector2(600, 50), 3, 24, Materials.Global_Font, "Login Here"));
     
     Objects.TestingScene_TestText = registry.RegisterObject("TestText", ["TestingScene"], [0], new SimpleText(new Vector2(600, 300), new Vector2(300, 50), 18, "DEFAULT TEXT!!", Color.Black, true, true));
@@ -59,6 +59,8 @@ public static class Registration
     registry.AssignSceneScript("Page/Profile", new Page_Profile(registry));
     registry.AssignGlobalScript(new GlobalSceneOverlay(registry));
     registry.AssignGuiScript(new DebuggerWindow(registry));
+    
+    registry.GetDatabaseManager().EnableDatabase();
     registry.SwitchDebugMode();
     
     return registry;

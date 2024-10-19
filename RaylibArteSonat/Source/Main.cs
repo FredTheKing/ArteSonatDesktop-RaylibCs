@@ -21,6 +21,7 @@ while (!Raylib.WindowShouldClose())
   
   Raylib.EndDrawing();
 }
+registry.GetDatabaseManager().DisableDatabase();
 Raylib.CloseWindow();
 Raylib.CloseAudioDevice();
 rlImGui.Shutdown();

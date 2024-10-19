@@ -29,14 +29,16 @@ public class SimpleTimer(double target_time_in_seconds = 1f, bool start_at_activ
       ImGui.Text($"- Time: {_time}");
       ImGui.Text($"- Start Time: {_start_time}");
       ImGui.Text($"- Current Time: {_current_time}");
-      ImGui.Text($"- Dead: {(_dead ? 1 : 0)}");
+      ImGui.Separator();
       ImGui.Text($"- Going: {(_go ? 1 : 0)}");
+      ImGui.Text($"- Dead: {(_dead ? 1 : 0)}");
+      ImGui.Text($"- Target Time: {_target_time}");
       ImGui.Text($"- Triggered: {(_target_activate ? 1 : 0)}");
       ImGui.Separator();
-      ImGui.Text($"- Target Time: {_target_time}");
       ImGui.Text($"- Start on Activation: {(_start_at_activation ? 1 : 0)}");
       ImGui.Text($"- Todo on end: {(_delete_or_loop_on_end ? "Loop" : "Delete")}");
-      
+      if (_delete_or_loop_on_end) ImGui.Text($"- Auto reset on end: {(_reset_target_when_ended ? 1 : 0)}");
+
       ImGui.TreePop();
     }
   }

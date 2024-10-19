@@ -7,7 +7,7 @@ public class Auth_Login(Registry registry)
 {
   public void Activation()
   {
-    
+    if(registry.GetAuthentificationManager()?.GetCurrentProfile() == null) registry.GetAuthentificationManager().InitProfiles(registry.GetDatabaseManager().GetTable("Profile"));
   }
     
   public void Update()

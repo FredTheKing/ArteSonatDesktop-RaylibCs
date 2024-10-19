@@ -30,22 +30,26 @@ public class DebuggerWindow(Registry registry)
       var half_button_size = new Vector2(ImGui.GetWindowWidth() / 2 - 12, 19);
       if (ImGui.Button("Enable all", half_button_size))
       {
-        registry._show_hitboxes = true;
-        registry._show_bounds = true;
+        registry.SetShowHitboxes(true);
+        registry.SetShowBounds(true);
       }
       ImGui.SameLine();
       if (ImGui.Button("Disable all", half_button_size))
       {
-        registry._show_hitboxes = false;
-        registry._show_bounds = false;
+        registry.SetShowHitboxes(false);
+        registry.SetShowBounds(false);
       }
       
       ImGui.Text("Show Hitboxes: ");
       ImGui.SameLine(ImGui.GetWindowWidth() - 27);
-      ImGui.Checkbox("##Show Hitboxes", ref registry._show_hitboxes);
+      bool hitboxes = registry.GetShowHitboxes();
+      ImGui.Checkbox("##Show Hitboxes", ref hitboxes);
+      registry.SetShowHitboxes(hitboxes);
       ImGui.Text("Show Bounds: ");
       ImGui.SameLine(ImGui.GetWindowWidth() - 27);
-      ImGui.Checkbox("##Show Bounds", ref registry._show_bounds);
+      bool bounds = registry.GetShowBounds();
+      ImGui.Checkbox("##Show Bounds", ref bounds);
+      registry.SetShowBounds(bounds);
       
       String current_scene_name = registry.GetSceneManager().GetCurrentScene().GetName();
       ImGui.SeparatorText("Resources");

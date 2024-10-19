@@ -20,8 +20,10 @@
 
     <ItemGroup>
       <PackageReference Include="ImGui.NET" Version="1.91.0.1" />
+      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.10" />
       <PackageReference Include="Raylib-cs" Version="6.1.1" />
       <PackageReference Include="rlImgui-cs" Version="2.1.0" />
+      <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +39,14 @@
       <Content Include="Resources\Font\regular.ttf">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Resources\db.db" />
+      <Content Include="Resources\db.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\db.sqlite3" />
     </ItemGroup>
 
 </Project>

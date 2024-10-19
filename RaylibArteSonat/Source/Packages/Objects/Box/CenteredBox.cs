@@ -5,9 +5,9 @@ using RaylibArteSonat.Source.Packages.Module;
 
 namespace RaylibArteSonat.Packages.Objects.Box;
 
-public class CenteredBox(Vector2 position, Vector2 size, Color color, Vector2? offset = null) : SimpleBox(position, size, color)
+public class CenteredBox(Vector2 offset, Vector2 size, Color color) : SimpleBox(new Vector2(0, 0), size, color)
 {
-  protected Vector2 _offset = offset ?? new Vector2(0, 0);
+  protected Vector2 _offset = offset;
 
   public new void CallDebuggerInfo(Registry registry)
   {

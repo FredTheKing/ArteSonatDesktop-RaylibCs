@@ -6,13 +6,15 @@ namespace RaylibArteSonat.Source.Packages.Module;
 public class Registry(params String[] scenes_names)
 {
   private bool _debug_mode = false;
-  public bool _show_hitboxes = true;
-  public bool _show_bounds = true;
+  private bool _show_hitboxes = true;
+  private bool _show_bounds = true;
   
   private readonly ShortcutManager _shortcut_manager = new();
   private readonly SceneManager _scene_manager = new(scenes_names);
   private readonly GuiManager _gui_manager = new();
   private readonly ResourcesManager _resources_manager = new(scenes_names);
+  private readonly DatabaseManager _database_manager = new();
+  private readonly AuthenticationManager _authentication_manager = new();
   
   private Dictionary<String, Dictionary<String, Object>> _container = new();
 
@@ -31,6 +33,7 @@ public class Registry(params String[] scenes_names)
       {
         target_scenes.Add(scene_name);
       }
+      Console.WriteLine("INFO: REGISTRY: Object '" + name + "' loaded successfully");
     }
     
     foreach (string scene_name in target_scenes)
@@ -65,6 +68,7 @@ public class Registry(params String[] scenes_names)
       {
         target_scenes.Add(scene_name);
       }
+      Console.WriteLine("INFO: REGISTRY: Font material '" + name + "' loaded successfully");
     }
     
     foreach (string scene_name in target_scenes)
@@ -81,8 +85,12 @@ public class Registry(params String[] scenes_names)
 
   public void SwitchDebugMode() => _debug_mode = !_debug_mode;
 
+  public void SetShowHitboxes(bool boolean) => _show_hitboxes = boolean;
+  
   public bool GetShowHitboxes() => _show_hitboxes;
-
+  
+  public void SetShowBounds(bool boolean) => _show_bounds = boolean;
+  
   public bool GetShowBounds() => _show_bounds;
   
   public bool GetDebugMode() => _debug_mode;
@@ -110,7 +118,11 @@ public class Registry(params String[] scenes_names)
   public ShortcutManager GetShortcutManager() => _shortcut_manager;
   
   public ResourcesManager GetResourcesManager() => _resources_manager;
-
+  
+  public AuthenticationManager GetAuthentificationManager() => _authentication_manager;
+  
+  public DatabaseManager GetDatabaseManager() => _database_manager;
+  
   public void AssignSceneScript(string scene_name, dynamic script_instance) => 
     _scene_manager.AssignScriptInstance(scene_name, script_instance);
   

@@ -13,7 +13,7 @@ public class ResourcesManager(params String[] scenes_names)
   //   }
   // }
   private Dictionary<String, Dictionary<String, Dictionary<String, dynamic>>> _storage = new();
-
+  
   public Dictionary<String, Dictionary<String, Dictionary<String, dynamic>>> GetStorage() => _storage;
 
   private void CheckSceneKey(String scene_name)

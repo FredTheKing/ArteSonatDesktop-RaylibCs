@@ -12,17 +12,20 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
 {
   private readonly string _placeholder_text = placeholder_text;
   
-  private string _text = "";
-  private SimpleText _display_text = new(position, size, 18, Color.Black, font, true);
-  private SimpleTimer _ibeam_timer = new(0.5f, false, true);
-  private SimpleTimer _backspace_timer = new(0.8f, false, true, false);
-  private SimpleTimer _deleting_timer = new(0.04f, false, true);
-  private readonly Rectangle _rectangle = new Rectangle(position, size);
-  private readonly RectangleHitbox _hitbox = new RectangleHitbox(ref position, size, new Color{R = 200, G = 200, B = 255, A = 123});
+  protected string _text = "";
+  protected SimpleText _display_text = new(position, size, 18, Color.Black, font, true);
+  protected SimpleTimer _ibeam_timer = new(0.5f, false, true);
+  protected SimpleTimer _backspace_timer = new(0.8f, false, true, false);
+  protected SimpleTimer _deleting_timer = new(0.04f, false, true);
+  protected readonly Rectangle _rectangle = new Rectangle(position, size);
+  protected readonly RectangleHitbox _hitbox = new RectangleHitbox(ref position, size, new Color{R = 200, G = 200, B = 255, A = 123});
+
+  protected sbyte _min_length = min_length;
+  protected sbyte _max_length = max_length;
   
-  private bool _ibeam_show = false;
-  private bool _disabled = disabled;
-  private bool _focused = false;
+  protected bool _ibeam_show = false;
+  protected bool _disabled = disabled;
+  protected bool _focused = false;
 
   public new void CallDebuggerInfo(Registry registry)
   {
@@ -32,6 +35,10 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
     ImGui.Text($"- Input Value: {(_text != "" ? _text : "!# EMPTY #!")}");
     ImGui.Text($"- Display Value: {(_display_text.GetText() != "" ? _display_text.GetText() : "!# EMPTY #!")}");
     ImGui.Text($"- Raw Display Value: {_display_text.GetTextRaw()}");
+    ImGui.Separator();
+    ImGui.Text($"- Min Length: {_min_length}");
+    ImGui.Text($"- Max Length: {_max_length}");
+    ImGui.Text($"- Current Length: {_text.Length}");
     ImGui.Separator();
     ImGui.Text($"- Focused: {(_focused ? 1 : 0)}");
     ImGui.Text($"- Disabled: {(_disabled ? 1 : 0)}");
@@ -46,7 +53,7 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
   
   public void SwitchDisabled() => _disabled = !_disabled;
 
-  private void CheckFocused(Registry registry)
+  protected void CheckFocused(Registry registry)
   {
     if(_disabled) return;
     if (_hitbox.GetMousePressed(MouseButton.Left))
@@ -85,40 +92,51 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
   private void CheckInput(Registry registry)
   {
     char character = registry.GetShortcutManager().GetCharPressed();
-    if (_focused & character != 0)
+    if (_focused & character != 0 & _text.Length < _max_length)
     {
       _text += character;
       //Console.WriteLine(character);
     }
   }
-  
-  private void UpdateText(Registry registry)
+
+  public bool AreBoundsGood() => _text.Length >= _min_length && _text.Length <= _max_length;
+
+  protected void UpdateText(Registry registry)
   {
     CheckInput(registry);
     CheckBackspace(registry);
   }
 
-  private void UpdateDisplayText()
+  protected void UpdateDisplayText(bool stars = false)
   {
+    string ibeam = _ibeam_show ? "_" : "";
     if(_text.Length == 0 && !_focused)
     {
       _display_text.SetCurrentFrameColor(Color.LightGray);
       _display_text.SetText(_placeholder_text);
     }
-    else _display_text.SetText(_text + (_ibeam_show ? "_" : ""));
+    else if (!stars) _display_text.SetText(_text + ibeam);
+    else _display_text.SetText(new string('*', _text.Length) + ibeam);
   }
-  
-  private void ChangeMouseAnimation(Registry registry)
+
+  protected void ChangeMouseAnimation(Registry registry)
   {
     if (_hitbox.GetMouseHover() & _disabled) Raylib.SetMouseCursor(MouseCursor.NotAllowed);
     else if (_hitbox.GetMouseHover()) Raylib.SetMouseCursor(MouseCursor.IBeam);
     else Raylib.SetMouseCursor(MouseCursor.Default);
   }
 
-  private void CheckIBeam(Registry registry)
+  protected void CheckIBeam(Registry registry)
   {
     _ibeam_timer.Update(registry);
     if (_ibeam_timer.IsEnded()) _ibeam_show = !_ibeam_show;
+  }
+
+  public new void Activation(Registry registry)
+  {
+    _hitbox.Activation(registry);
+    _text = "";
+    base.Activation(registry);
   }
   
   public new void Update(Registry registry)
