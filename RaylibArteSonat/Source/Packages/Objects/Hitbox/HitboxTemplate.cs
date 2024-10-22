@@ -2,9 +2,9 @@ using System.Numerics;
 using ImGuiNET;
 using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
-namespace RaylibArteSonat.Packages.Objects.Hitbox;
+namespace RaylibArteSonat.Source.Packages.Objects.Hitbox;
 
-public class HitboxTemplate(ref Vector2 position, Color color) : ObjectTemplate
+public class HitboxTemplate(Vector2 position, Color color) : ObjectTemplate
 {
   
   protected Vector2 _hitbox_position = position;

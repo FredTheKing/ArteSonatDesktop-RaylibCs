@@ -3,7 +3,7 @@ using ImGuiNET;
 using Raylib_cs;
 using RaylibArteSonat.Source.Packages.Module;
 
-namespace RaylibArteSonat.Packages.Objects.Box;
+namespace RaylibArteSonat.Source.Packages.Objects.Box;
 
 public class CenteredBox(Vector2 offset, Vector2 size, Color color) : SimpleBox(new Vector2(0, 0), size, color)
 {

@@ -15,6 +15,10 @@ public class AuthenticationManager
     _current_profile = _profiles[_profiles.Keys.ToList()[0]];
     Console.WriteLine("INFO: AUTH: Profiles loaded successfully");
   }
+  
+  public Dictionary<string, Profile> GetProfiles() => _profiles;
+
+  public List<string> GetProfilesNames() => _profiles.Keys.ToList();
 
   public void ChangeProfile(string name) => _current_profile = _profiles[name];
 

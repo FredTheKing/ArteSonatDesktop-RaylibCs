@@ -21,10 +21,17 @@ public class ResourcesManager(params String[] scenes_names)
     if (!_storage.ContainsKey(scene_name)) _storage.Add(scene_name, new Dictionary<String, Dictionary<String, dynamic>>());
   }
 
-  public void AddFont(String scene_name, String name, FontResource mat)
+  public void AddMaterial(String scene_name, String name, FontResource mat)
   {
     CheckSceneKey(scene_name);
     if (!_storage[scene_name].ContainsKey("Font")) _storage[scene_name].Add("Font", new Dictionary<String, dynamic>());
     _storage[scene_name]["Font"].Add(name, mat);
+  }
+  
+  public void AddMaterial(String scene_name, String name, ImageResource mat)
+  {
+    CheckSceneKey(scene_name);
+    if (!_storage[scene_name].ContainsKey("Image")) _storage[scene_name].Add("Image", new Dictionary<String, dynamic>());
+    _storage[scene_name]["Image"].Add(name, mat);
   }
 }

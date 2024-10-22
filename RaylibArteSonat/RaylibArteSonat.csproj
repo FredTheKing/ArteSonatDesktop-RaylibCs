@@ -43,6 +43,7 @@
       <Content Include="Resources\db.db">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Resources\Font\iosevka.ttf" />
     </ItemGroup>
 
     <ItemGroup>

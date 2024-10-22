@@ -3,7 +3,7 @@ using Raylib_cs;
 using RaylibArteSonat.Source.Packages.Module;
 using RaylibArteSonat.Source.Packages.Objects.Shadow;
 
-namespace RaylibArteSonat.Packages.Objects.Box;
+namespace RaylibArteSonat.Source.Packages.Objects.Box;
 
 public class CenteredShadowBox(Vector2 offset, Vector2 size, Color color, Color shadow_color, int shadow_size) : CenteredBox(offset, size, color)
 {

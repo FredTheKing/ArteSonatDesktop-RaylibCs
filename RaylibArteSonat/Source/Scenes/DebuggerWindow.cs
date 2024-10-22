@@ -15,6 +15,7 @@ public class DebuggerWindow(Registry registry)
     if (ImGui.Begin("Debugger"))
     {
       ImGui.SeparatorText("Info");
+      ImGui.Text("Window size: " + Raylib.GetRenderWidth() + "/" + Raylib.GetRenderHeight());
       ImGui.Text("FPS: " + Raylib.GetFPS());
       ImGui.Text("MS: " + Raylib.GetFrameTime());
       ImGui.Text("Scene: ");

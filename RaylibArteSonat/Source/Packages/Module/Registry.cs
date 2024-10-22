@@ -33,7 +33,6 @@ public class Registry(params String[] scenes_names)
       {
         target_scenes.Add(scene_name);
       }
-      Console.WriteLine("INFO: REGISTRY: Object '" + name + "' loaded successfully");
     }
     
     foreach (string scene_name in target_scenes)
@@ -43,6 +42,7 @@ public class Registry(params String[] scenes_names)
         _container.Add(scene_name, new Dictionary<String, Object>());
       }
       
+      Console.WriteLine("INFO: REGISTRY: Object '" + name + "' for scene '" + scene_name + "' loaded successfully");
       _container[scene_name].Add(name, obj);
     }
     
@@ -53,7 +53,7 @@ public class Registry(params String[] scenes_names)
     return obj;
   }
   
-  public FontResource RegisterFont(String name, String[] scenes_names, FontResource mat)
+  public dynamic RegisterMaterial(String name, String[] scenes_names, dynamic mat)
   {
     List<string> target_scenes = new();
     
@@ -68,12 +68,12 @@ public class Registry(params String[] scenes_names)
       {
         target_scenes.Add(scene_name);
       }
-      Console.WriteLine("INFO: REGISTRY: Font material '" + name + "' loaded successfully");
     }
     
     foreach (string scene_name in target_scenes)
     {
-      _resources_manager.AddFont(scene_name, name, mat);
+      _resources_manager.AddMaterial(scene_name, name, mat);
+      Console.WriteLine("INFO: REGISTRY: Material '" + name + "' for scene '" + scene_name + "' loaded successfully");
     }
 
     return mat;

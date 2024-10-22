@@ -1,7 +1,7 @@
 using System.Numerics;
 using ImGuiNET;
 using Raylib_cs;
-using RaylibArteSonat.Packages.Objects.Hitbox;
+using RaylibArteSonat.Source.Packages.Objects.Hitbox;
 using RaylibArteSonat.Source.Packages.Module;
 using RaylibArteSonat.Source.Packages.Objects.Text;
 using RaylibArteSonat.Source.Packages.Objects.Timer;
@@ -10,15 +10,15 @@ namespace RaylibArteSonat.Source.Packages.Objects.Input;
 
 public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte max_length, FontResource font, string placeholder_text = null, bool disabled = false) : ObjectTemplate
 {
-  private readonly string _placeholder_text = placeholder_text;
+  protected readonly string _placeholder_text = placeholder_text;
   
   protected string _text = "";
   protected SimpleText _display_text = new(position, size, 18, Color.Black, font, true);
   protected SimpleTimer _ibeam_timer = new(0.5f, false, true);
   protected SimpleTimer _backspace_timer = new(0.8f, false, true, false);
   protected SimpleTimer _deleting_timer = new(0.04f, false, true);
-  protected readonly Rectangle _rectangle = new Rectangle(position, size);
-  protected readonly RectangleHitbox _hitbox = new RectangleHitbox(ref position, size, new Color{R = 200, G = 200, B = 255, A = 123});
+  protected Rectangle _rectangle = new Rectangle(position, size);
+  protected RectangleHitbox _hitbox = new RectangleHitbox(position, size, new Color{R = 200, G = 200, B = 255, A = 123});
 
   protected sbyte _min_length = min_length;
   protected sbyte _max_length = max_length;
@@ -107,7 +107,7 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
     CheckBackspace(registry);
   }
 
-  protected void UpdateDisplayText(bool stars = false)
+  protected void UpdateDisplayText()
   {
     string ibeam = _ibeam_show ? "_" : "";
     if(_text.Length == 0 && !_focused)
@@ -115,8 +115,7 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
       _display_text.SetCurrentFrameColor(Color.LightGray);
       _display_text.SetText(_placeholder_text);
     }
-    else if (!stars) _display_text.SetText(_text + ibeam);
-    else _display_text.SetText(new string('*', _text.Length) + ibeam);
+    else _display_text.SetText(_text + ibeam);
   }
 
   protected void ChangeMouseAnimation(Registry registry)
@@ -124,6 +123,13 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
     if (_hitbox.GetMouseHover() & _disabled) Raylib.SetMouseCursor(MouseCursor.NotAllowed);
     else if (_hitbox.GetMouseHover()) Raylib.SetMouseCursor(MouseCursor.IBeam);
     else Raylib.SetMouseCursor(MouseCursor.Default);
+  }
+
+  public void SetPosition(Vector2 new_position)
+  {
+    _rectangle.Position = new_position;
+    _hitbox.SetPosition(new_position);
+    _display_text.SetPosition(new_position);
   }
 
   protected void CheckIBeam(Registry registry)

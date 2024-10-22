@@ -2,9 +2,9 @@ using System.Numerics;
 using ImGuiNET;
 using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
-namespace RaylibArteSonat.Packages.Objects.Hitbox;
+namespace RaylibArteSonat.Source.Packages.Objects.Hitbox;
 
-public class RectangleHitbox(ref Vector2 position, Vector2 size, Color color) : HitboxTemplate(ref position, color)
+public class RectangleHitbox(Vector2 position, Vector2 size, Color color) : HitboxTemplate(position, color)
 {
   protected Vector2 _hitbox_size = size;
   
@@ -38,9 +38,14 @@ public class RectangleHitbox(ref Vector2 position, Vector2 size, Color color) : 
     }
   }
   
-  public void UpdateBoundaries(Vector2 new_size)
+  public void SetBoundaries(Vector2 new_size)
   {
     _hitbox_size = new_size;
+  }
+  
+  public void SetPosition(Vector2 new_position)
+  {
+    _hitbox_position = new_position;
   }
 
   private new void CheckMouseHover()

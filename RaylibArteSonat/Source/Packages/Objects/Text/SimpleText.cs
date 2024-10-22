@@ -93,12 +93,16 @@ public class SimpleText : ObjectTemplate
   {
     string converted_text = Encoding.UTF8.GetString(_text);
     
-    float text_pos_x = _align_center_h ? _position.X + _size.X/2 - Raylib.MeasureText(converted_text, _font_size)/2 : _position.X + 10;
-    float text_pos_y = _align_center_v ? _position.Y + _size.Y/2 - _font_size/2 : _position.Y + 10;
-    Vector2 new_position = new Vector2 { X = text_pos_x, Y = text_pos_y };
+    Vector2 measured_text = Raylib.MeasureTextEx(_font.GetMaterial(), GetText(), _font_size, _font_spacing);
+    float text_pos_x = _align_center_h ? _position.X + _size.X/2 - measured_text.X/2 : _position.X + 10;
+    float text_pos_y = _align_center_v ? _position.Y + _size.Y/2 - measured_text.Y/2 : _position.Y + 10;
+    
+    Vector2 new_position = new Vector2(text_pos_x, text_pos_y);
     
     Raylib.DrawTextEx(_font.GetMaterial(), converted_text, new_position + _offset, _font_size, _font_spacing, _color);
   }
+  
+  public void SetPosition(Vector2 new_position) => _position = new_position;
   
   public void SetCurrentFrameColor(Color color) => _color = color;
   
