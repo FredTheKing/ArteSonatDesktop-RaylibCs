@@ -1,6 +1,6 @@
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class AuthenticationManager
+public class AuthenticationManager : CallDebuggerInfoTemplate
 {
   private Dictionary<string, Profile> _profiles = [];
   private Profile _current_profile;

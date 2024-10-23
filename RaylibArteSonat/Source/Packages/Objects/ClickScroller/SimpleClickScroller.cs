@@ -6,23 +6,18 @@ using RaylibArteSonat.Source.Packages.Module;
 using RaylibArteSonat.Source.Packages.Objects.Text;
 namespace RaylibArteSonat.Source.Packages.Objects.Scroller;
 
-public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource font, List<string> options = null) : ObjectTemplate
+public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource font, List<string> options = null) : UiTemplate(position, size)
 {
-  protected Rectangle _rectangle = new(position, size);
   protected List<string> _options = options;
-  protected string _selected_option;
-  
-  protected RectangleHitbox _hitbox = new(position, size, new Color { R = 255, G = 155, B = 255, A = 123 });
+  protected string? _selected_option;
   protected SimpleText _display_text = new(position, size, 18, Color.Black, font, true, true);
-  
-  protected bool _focused = false;
   
   public void UpdateSelectedOption(int index = 0) => _selected_option = _options[index];
 
   public new void CallDebuggerInfo(Registry registry)
   {
-    ImGui.Text($"- Position: {_rectangle.X}, {_rectangle.Y}");
-    ImGui.Text($"- Size: {_rectangle.Width}, {_rectangle.Height}");
+    ImGui.Text($"- Position: {_position.X}, {_position.Y}");
+    ImGui.Text($"- Size: {_size.X}, {_size.Y}");
     ImGui.Separator();
     ImGui.Text($"- Options count: {_options.Count}");
     ImGui.Text($"- Selected Option: {_selected_option}");
@@ -32,27 +27,15 @@ public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource fo
     _hitbox.CallDebuggerInfo(registry);
   }
   
-  protected void CheckFocused(Registry registry)
-  {
-    if (_hitbox.GetMousePressed(MouseButton.Left) || _hitbox.GetMousePressed(MouseButton.Right))
-    {
-      _focused = true;
-    } 
-    else if (_hitbox.GetMouseOutsidePressed(MouseButton.Left) || _hitbox.GetMouseOutsidePressed(MouseButton.Right) || registry.GetShortcutManager().IsKeyPressed(KeyboardKey.Escape))
-    {
-      _focused = false;
-    }
-  }
-  
   public void SetOptions(List<string> options)
   {
     _options = options;
     UpdateSelectedOption();
   }
   
-  public void SetPosition(Vector2 new_position)
+  public new void SetPosition(Vector2 new_position)
   {
-    _rectangle.Position = new_position;
+    _position = new_position;
     _hitbox.SetPosition(new_position);
     _display_text.SetPosition(new_position);
   }
@@ -78,26 +61,19 @@ public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource fo
     base.Activation(registry);
   }
   
-  public new void Update(Registry registry)
+  public override void MidUpdate(Registry registry)
   {
     CheckFocused(registry);
     ChangeOption();
     UpdateDisplayText();
     
     _display_text.Update(registry);
-    _hitbox.Update(registry);
-    base.Update(registry);
   }
 
-  public new void Draw(Registry registry)
+  public override void MidDraw(Registry registry)
   {
-    Raylib.DrawRectangleRec(_rectangle, Color.White);
-    if (_hitbox.GetMouseHover() && !_focused) Raylib.DrawRectangleLinesEx(_rectangle, 2, Color.SkyBlue);
-    if (_focused) Raylib.DrawRectangleLinesEx(_rectangle, 3, Color.Blue);
-    else Raylib.DrawRectangleLinesEx(_rectangle, 1, Color.LightGray);
-    
     _display_text.Draw(registry);
-    _hitbox.Draw(registry);
-    base.Draw(registry);
   }
+  
+  public override void MidDebugDraw(Registry registry) => _display_text.DrawDebug(registry);
 }

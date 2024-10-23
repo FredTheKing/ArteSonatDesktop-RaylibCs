@@ -60,8 +60,6 @@ public class SimpleText : ObjectTemplate
   }
   
   private byte[] _text;
-  private Vector2 _position;
-  private Vector2 _size;
   private int _font_size;
   private float _font_spacing = 1.0f;
   private Color _color; 
@@ -102,8 +100,6 @@ public class SimpleText : ObjectTemplate
     Raylib.DrawTextEx(_font.GetMaterial(), converted_text, new_position + _offset, _font_size, _font_spacing, _color);
   }
   
-  public void SetPosition(Vector2 new_position) => _position = new_position;
-  
   public void SetCurrentFrameColor(Color color) => _color = color;
   
   public string GetTextRaw() => BitConverter.ToString(_text).Replace("-", "");
@@ -121,8 +117,13 @@ public class SimpleText : ObjectTemplate
   public new void Draw(Registry registry)
   {
     DrawText();
-    if(registry.GetShowBounds() & registry.GetDebugMode()) Raylib.DrawRectangleLinesEx(new Rectangle(_position, _size), 1, Color.Lime);
+    DrawDebug(registry);
     base.Draw(registry);
     UndoColorChanges();
+  }
+
+  protected internal void DrawDebug(Registry registry)
+  {
+    if(registry.GetShowBounds() & registry.GetDebugMode()) Raylib.DrawRectangleLinesEx(new Rectangle(_position, _size), 1, Color.Lime);
   }
 }

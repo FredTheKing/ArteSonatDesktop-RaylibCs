@@ -1,7 +1,7 @@
 using Raylib_cs;
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class ResourcesManager(params String[] scenes_names)
+public class ResourcesManager(params String[] scenes_names) : CallDebuggerInfoTemplate
 {
   // {
   //   scene_name:

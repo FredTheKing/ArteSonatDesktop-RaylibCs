@@ -4,11 +4,9 @@ using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 namespace RaylibArteSonat.Source.Packages.Objects.Hitbox;
 
-public class HitboxTemplate(Vector2 position, Color color) : ObjectTemplate
+public class HitboxTemplate(Vector2 position, Vector2 size, Color color) : ObjectTemplate(position, size)
 {
-  
-  protected Vector2 _hitbox_position = position;
-  protected Color _hitbox_color = color;
+  protected Color _color = color;
   
   // LMB, RMB, MMB in List
   protected bool _hitbox_click_hover = false;

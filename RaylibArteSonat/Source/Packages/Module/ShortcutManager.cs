@@ -2,7 +2,7 @@ using Raylib_cs;
 
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class ShortcutManager
+public class ShortcutManager : CallDebuggerInfoTemplate
 {
   public char GetCharPressed()
   {

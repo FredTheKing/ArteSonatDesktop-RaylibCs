@@ -1,6 +1,6 @@
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class GuiManager
+public class GuiManager : CallDebuggerInfoTemplate
 {
   private dynamic _script_instance;
   

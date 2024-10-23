@@ -1,12 +1,24 @@
+using System.Numerics;
+using ImGuiNET;
+
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class SceneManager(params String[] scenes_names)
+public class SceneManager(params String[] scenes_names) : CallDebuggerInfoTemplate
 { 
   private Dictionary<String, Scene> _scenes = InitScenes(scenes_names);
   private String[] _scenes_names = scenes_names;
   private Scene _current_scene;
   private bool _changed = true;
 
+  public new void CallDebuggerInfo(Registry registry)
+  {
+    if (ImGui.TreeNode($"Current Scene: {_current_scene.GetName()}"))
+    {
+      _current_scene.CallDebuggerInfo(registry);
+      ImGui.TreePop();
+    }
+  }
+  
   private static Dictionary<String, Scene> InitScenes(params String[] scenes_names)
   {
     var list = new Dictionary<String, Scene>();

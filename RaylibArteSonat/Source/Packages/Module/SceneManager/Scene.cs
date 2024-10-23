@@ -1,8 +1,9 @@
 using System.Runtime.InteropServices.JavaScript;
+using ImGuiNET;
 
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class Scene(string name)
+public class Scene(string name) : CallDebuggerInfoTemplate
 {
   private string _name = name;
   private Dictionary<String, Dictionary<String, dynamic>> _resources_dictionary = new();
@@ -11,6 +12,13 @@ public class Scene(string name)
   private dynamic _script_instance;
   private dynamic _global_script_instance;
 
+  public new void CallDebuggerInfo(Registry registry)
+  {
+    ImGui.Text($"- Name: {_name}");
+    ImGui.Text($"- Materials Count: {_resources_dictionary.SelectMany(x => x.Value).Count()}");
+    ImGui.Text($"- Objects Count: {_sorted_list_objects.Count()}");
+  }
+  
   public void AddObject(Object obj, int z_layer)
   { 
     if (!_unsorted_dict_objects.ContainsKey(z_layer))

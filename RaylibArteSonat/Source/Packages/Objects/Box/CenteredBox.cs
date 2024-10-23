@@ -14,7 +14,7 @@ public class CenteredBox(Vector2 offset, Vector2 size, Color color) : SimpleBox(
     ImGui.Text($"- Offset: {_offset.X}, {_offset.Y}");
     base.CallDebuggerInfo(registry);
   }
-  
+
   public new void Update(Registry registry)
   {
     _rectangle.X = Raylib.GetRenderWidth() / 2 - _rectangle.Width / 2 + _offset.X;
@@ -22,9 +22,6 @@ public class CenteredBox(Vector2 offset, Vector2 size, Color color) : SimpleBox(
     base.Update(registry);
   }
 
-  public new void AddPosition(Vector2 position)
-  {
-    _offset.X += position.X;
-    _offset.Y += position.Y;
-  }
+  public new void SetPosition(Vector2 position) => _offset = position;
+  public new void AddPosition(Vector2 position) => _offset += position;
 }

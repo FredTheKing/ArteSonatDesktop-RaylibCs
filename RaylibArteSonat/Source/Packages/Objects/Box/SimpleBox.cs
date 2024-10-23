@@ -4,7 +4,7 @@ using RaylibArteSonat.Source.Packages.Module;
 using Raylib_cs;
 namespace RaylibArteSonat.Source.Packages.Objects.Box;
 
-public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemplate
+public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemplate()
 {
   protected Rectangle _rectangle = new(position, size);
   protected Color _color = color;
@@ -27,21 +27,11 @@ public class SimpleBox(Vector2 position, Vector2 size, Color color) : ObjectTemp
     ImGui.EndGroup();
   }
   
-  public Vector2 GetPosition()
-  {
-    return new Vector2(_rectangle.X, _rectangle.Y);
-  }
+  public new Vector2 GetPosition() => _rectangle.Position;
 
-  public Vector2 GetSize()
-  {
-    return new Vector2(_rectangle.Width, _rectangle.Height);;
-  }
+  public new Vector2 GetSize() => _rectangle.Size;
 
-  public void AddPosition(Vector2 position)
-  {
-    _rectangle.X += position.X;
-    _rectangle.Y += position.Y;
-  }
+  public void AddPosition(Vector2 position) => _rectangle.Position += position;
 
   public new void Draw(Registry registry)
   {

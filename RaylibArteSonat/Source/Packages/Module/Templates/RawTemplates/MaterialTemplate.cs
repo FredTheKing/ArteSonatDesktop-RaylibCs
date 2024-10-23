@@ -1,7 +1,7 @@
 using ImGuiNET;
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class MaterialTemplate
+public class MaterialTemplate : CallDebuggerInfoTemplate
 {
   protected String _filename;
   protected dynamic _material;
@@ -10,6 +10,4 @@ public class MaterialTemplate
   public void Load() { }
   public String GetFilename() => _filename;
   public dynamic GetMaterial() => _material;
-
-  public void CallDebuggerInfo(Registry registry) { ImGui.Text("- No Info Provided"); }
 }

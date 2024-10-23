@@ -2,7 +2,7 @@ using System.Data.SQLite;
 
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class DatabaseManager
+public class DatabaseManager : CallDebuggerInfoTemplate
 {
   private readonly SQLiteConnection _connection = new SQLiteConnection("Data Source=Resources/db.db");
 
