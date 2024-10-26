@@ -1,11 +1,16 @@
 using System.Data.SQLite;
-
+using ImGuiNET;
 namespace RaylibArteSonat.Source.Packages.Module;
 
 public class DatabaseManager : CallDebuggerInfoTemplate
 {
   private readonly SQLiteConnection _connection = new SQLiteConnection("Data Source=Resources/db.db");
-
+  
+  public new void CallDebuggerInfo(Registry registry)
+  {
+    ImGui.Text($" > Status: {_connection.State}");
+    ImGui.Text($" > Connection: {_connection.ConnectionString}");}
+  
   public List<List<dynamic>> GetTable(string table_name)
   {
     SQLiteCommand command = new SQLiteCommand("SELECT * FROM " + table_name, _connection);
@@ -32,5 +37,12 @@ public class DatabaseManager : CallDebuggerInfoTemplate
   {
     _connection.Close();
     Console.WriteLine("INFO: DB: Database closed successfully");
+  }
+  
+  public void RunCommand(string given_command)
+  {
+    SQLiteCommand command = new SQLiteCommand(given_command, _connection);
+    command.ExecuteNonQuery();
+    Console.WriteLine("INFO: DB: Database command <" + given_command + "> completed succesfully");
   }
 }

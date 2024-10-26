@@ -1,3 +1,4 @@
+using ImGuiNET;
 using Raylib_cs;
 namespace RaylibArteSonat.Source.Packages.Module;
 
@@ -16,6 +17,11 @@ public class ResourcesManager(params String[] scenes_names) : CallDebuggerInfoTe
   
   public Dictionary<String, Dictionary<String, Dictionary<String, dynamic>>> GetStorage() => _storage;
 
+  public new void CallDebuggerInfo(Registry registry)
+  {
+    ImGui.Text($" > Resources Count: {_storage.Count}");
+  }
+  
   private void CheckSceneKey(String scene_name)
   {
     if (!_storage.ContainsKey(scene_name)) _storage.Add(scene_name, new Dictionary<String, Dictionary<String, dynamic>>());

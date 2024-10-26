@@ -10,19 +10,19 @@ public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource fo
 {
   protected List<string> _options = options;
   protected string? _selected_option;
-  protected SimpleText _display_text = new(position, size, 18, Color.Black, font, true, true);
+  protected SimpleText _display_text = new(position, size, 24, Color.Black, font, true, true);
   
   public void UpdateSelectedOption(int index = 0) => _selected_option = _options[index];
 
   public new void CallDebuggerInfo(Registry registry)
   {
-    ImGui.Text($"- Position: {_position.X}, {_position.Y}");
-    ImGui.Text($"- Size: {_size.X}, {_size.Y}");
+    ImGui.Text($" > Position: {_position.X}, {_position.Y}");
+    ImGui.Text($" > Size: {_size.X}, {_size.Y}");
     ImGui.Separator();
-    ImGui.Text($"- Options count: {_options.Count}");
-    ImGui.Text($"- Selected Option: {_selected_option}");
+    ImGui.Text($" > Options count: {_options.Count}");
+    ImGui.Text($" > Selected Option: {_selected_option}");
     ImGui.Separator();
-    ImGui.Text($"- Focused: {(_focused ? 1 : 0)}");
+    ImGui.Text($" > Focused: {(_focused ? 1 : 0)}");
     
     _hitbox.CallDebuggerInfo(registry);
   }
@@ -40,7 +40,7 @@ public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource fo
     _display_text.SetPosition(new_position);
   }
   
-  public void UpdateDisplayText() => _display_text.SetText("< " + _selected_option + " >");
+  public void UpdateDisplayText() => _display_text.SetText("> " + _selected_option + " <");
 
   public void ChangeOption()
   {
@@ -54,6 +54,8 @@ public class SimpleClickScroller(Vector2 position, Vector2 size, FontResource fo
     
     UpdateSelectedOption(index);
   }
+  
+  public string? GetOption() => _selected_option;
   
   public new void Activation(Registry registry)
   {

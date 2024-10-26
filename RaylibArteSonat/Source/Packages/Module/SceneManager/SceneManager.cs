@@ -17,6 +17,8 @@ public class SceneManager(params String[] scenes_names) : CallDebuggerInfoTempla
       _current_scene.CallDebuggerInfo(registry);
       ImGui.TreePop();
     }
+    ImGui.Text($" > Changed Scene: {(_changed ? 1 : 0)}");
+    ImGui.Text($" > Scenes Count: {_scenes.Count}");
   }
   
   private static Dictionary<String, Scene> InitScenes(params String[] scenes_names)
@@ -68,5 +70,6 @@ public class SceneManager(params String[] scenes_names) : CallDebuggerInfoTempla
     _current_scene = _scenes[scene_name];
     _changed = true;
     _current_scene.Load();
+    Console.WriteLine("INFO: SCENE: Scene changed successfully");
   }
 }

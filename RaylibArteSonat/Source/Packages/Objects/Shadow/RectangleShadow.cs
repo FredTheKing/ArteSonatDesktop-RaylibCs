@@ -1,19 +1,35 @@
 using System.Numerics;
+using ImGuiNET;
 using Raylib_cs;
 using RaylibArteSonat.Source.Packages.Module;
 namespace RaylibArteSonat.Source.Packages.Objects.Shadow;
 
-public class RectangeShadow(Color color, int size) : ObjectTemplate
+public class RectangleShadow(Vector2 position, Vector2 size, Color color, int shadow_size) : ObjectTemplate(position, size)
 {
   private readonly Color _shadow_color = color;
-  private readonly int _shadow_size = size;
+  private readonly int _shadow_size = shadow_size;
   
-  public new void Draw(Rectangle rectangle)
+  protected string debugger_name = "Shadow-" + new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 4)
+    .Select(s => s[new Random().Next(s.Length)]).ToArray());
+  
+  public new void CallDebuggerInfo(Registry registry)
   {
-    var posX = (int)rectangle.X;
-    var posY = (int)rectangle.Y;
-    var sizeX = (int)rectangle.Width;
-    var sizeY = (int)rectangle.Height;
+    if (ImGui.TreeNode(debugger_name))
+    {
+      ImGui.Text($" > Position: {_position.X}, {_position.Y}");
+      ImGui.Text($" > Size: {_size.X}, {_size.Y}");
+      ImGui.Text($" > Color: {_shadow_color.R}, {_shadow_color.G}, {_shadow_color.B}, {_shadow_color.A}");
+      ImGui.Text($" > Shadow Size: {_shadow_size}");
+      ImGui.TreePop();
+    }
+  }
+  
+  public void Draw(Rectangle rectangle)
+  {
+    var posX = (int)_position.X;
+    var posY = (int)_position.Y;
+    var sizeX = (int)_size.X;
+    var sizeY = (int)_size.Y;
 
     int shadow_half = _shadow_size / 2;
     

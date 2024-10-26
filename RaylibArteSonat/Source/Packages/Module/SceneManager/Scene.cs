@@ -14,9 +14,9 @@ public class Scene(string name) : CallDebuggerInfoTemplate
 
   public new void CallDebuggerInfo(Registry registry)
   {
-    ImGui.Text($"- Name: {_name}");
-    ImGui.Text($"- Materials Count: {_resources_dictionary.SelectMany(x => x.Value).Count()}");
-    ImGui.Text($"- Objects Count: {_sorted_list_objects.Count()}");
+    ImGui.Text($" > Name: {_name}");
+    ImGui.Text($" > Objects Count: {_sorted_list_objects.Count()}");
+    ImGui.Text($" > Materials Count: {_resources_dictionary.SelectMany(x => x.Value).Count()}");
   }
   
   public void AddObject(Object obj, int z_layer)

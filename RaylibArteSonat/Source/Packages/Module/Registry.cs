@@ -1,13 +1,15 @@
+using ImGuiNET;
 using Raylib_cs;
 using rlImGui_cs;
 
 namespace RaylibArteSonat.Source.Packages.Module;
 
-public class Registry(params String[] scenes_names)
+public class Registry(params String[] scenes_names) : CallDebuggerInfoTemplate
 {
   private bool _debug_mode = false;
   private bool _show_hitboxes = true;
   private bool _show_bounds = true;
+  private bool _show_fps_non_debug = false;
   
   private readonly ShortcutManager _shortcut_manager = new();
   private readonly SceneManager _scene_manager = new(scenes_names);
@@ -15,9 +17,21 @@ public class Registry(params String[] scenes_names)
   private readonly ResourcesManager _resources_manager = new(scenes_names);
   private readonly DatabaseManager _database_manager = new();
   private readonly AuthenticationManager _authentication_manager = new();
+  private readonly MouseAnimationManager _mouse_animation_manager = new();
   
   private Dictionary<String, Dictionary<String, Object>> _container = new();
 
+  public new void CallDebuggerInfo(Registry registry)
+  {
+    ImGui.Text($" > Debug Mode: {(_debug_mode ? 1 : 0)}");
+    ImGui.Text($" > Show Hitboxes: {(_show_hitboxes ? 1 : 0)}");
+    ImGui.Text($" > Show Bounds: {(_show_bounds ? 1 : 0)}");
+    ImGui.Text($" > Show Fps Non Debug: {(_show_fps_non_debug ? 1 : 0)}");
+    ImGui.Separator();
+    ImGui.Text($" > Total Objects: {_container.SelectMany(x => x.Value).Count()}");
+    ImGui.Text($" > Total Materials: {GetResourcesManager().GetStorage().SelectMany(x => x.Value).Count()}");
+  }
+  
   public dynamic RegisterObject(String name, String[] scenes_names, int[] z_layers, dynamic obj)
   {
     List<string> target_scenes = new();
@@ -93,6 +107,10 @@ public class Registry(params String[] scenes_names)
   
   public bool GetShowBounds() => _show_bounds;
   
+  public void SetShowFpsNonDebug(bool boolean) => _show_fps_non_debug = boolean;
+  
+  public bool GetShowFpsNonDebug() => _show_fps_non_debug;
+  
   public bool GetDebugMode() => _debug_mode;
 
   public void EndMaterialsRegistration()
@@ -122,6 +140,8 @@ public class Registry(params String[] scenes_names)
   public AuthenticationManager GetAuthentificationManager() => _authentication_manager;
   
   public DatabaseManager GetDatabaseManager() => _database_manager;
+  
+  public MouseAnimationManager GetMouseAnimationManager() => _mouse_animation_manager;
   
   public void AssignSceneScript(string scene_name, dynamic script_instance) => 
     _scene_manager.AssignScriptInstance(scene_name, script_instance);

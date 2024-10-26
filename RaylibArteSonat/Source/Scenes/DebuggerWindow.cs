@@ -3,7 +3,6 @@ using ImGuiNET;
 using Raylib_cs;
 using RaylibArteSonat.Source.Packages.Module;
 using rlImGui_cs;
-
 namespace RaylibArteSonat.Source.Scenes;
 
 public class DebuggerWindow(Registry registry)
@@ -11,6 +10,7 @@ public class DebuggerWindow(Registry registry)
   public void Process()
   {
     rlImGui.Begin();
+    ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarSize, 0);
 
     if (ImGui.Begin("Debugger"))
     {
@@ -24,24 +24,7 @@ public class DebuggerWindow(Registry registry)
       String[] array = registry.GetSceneManager().GetScenesNamesList();
       int index = Array.IndexOf(array, registry.GetSceneManager().GetCurrentScene().GetName());
       ImGui.SetNextItemWidth(174);
-      if (ImGui.Combo("##Scene Selector", ref index, array, array.Length))
-      {
-        registry.GetSceneManager().ChangeScene(array[index]);
-      }
-
-      var half_button_size = new Vector2(ImGui.GetWindowWidth() / 2 - 12, 19);
-      if (ImGui.Button("Enable all", half_button_size))
-      {
-        registry.SetShowHitboxes(true);
-        registry.SetShowBounds(true);
-      }
-      ImGui.SameLine();
-      if (ImGui.Button("Disable all", half_button_size))
-      {
-        registry.SetShowHitboxes(false);
-        registry.SetShowBounds(false);
-      }
-      
+      if (ImGui.Combo("##Scene Selector", ref index, array, array.Length)) registry.GetSceneManager().ChangeScene(array[index]);
       ImGui.Text("Show Hitboxes: ");
       ImGui.SameLine(ImGui.GetWindowWidth() - 27);
       bool hitboxes = registry.GetShowHitboxes();
@@ -52,15 +35,56 @@ public class DebuggerWindow(Registry registry)
       bool bounds = registry.GetShowBounds();
       ImGui.Checkbox("##Show Bounds", ref bounds);
       registry.SetShowBounds(bounds);
+      ImGui.Text("Show Fps Non Debug: ");
+      ImGui.SameLine(ImGui.GetWindowWidth() - 27);
+      bool fps = registry.GetShowFpsNonDebug();
+      ImGui.Checkbox("##Show Fps Non Debug", ref fps);
+      registry.SetShowFpsNonDebug(fps);
       
-      String current_scene_name = registry.GetSceneManager().GetCurrentScene().GetName();
+      var half_button_size = new Vector2(ImGui.GetWindowWidth() / 2 - 12, 19);
+      if (ImGui.Button("Enable all", half_button_size))
+      {
+        registry.SetShowHitboxes(true);
+        registry.SetShowBounds(true);
+        registry.SetShowFpsNonDebug(true);
+      }
+      ImGui.SameLine();
+      if (ImGui.Button("Disable all", half_button_size))
+      {
+        registry.SetShowHitboxes(false);
+        registry.SetShowBounds(false);
+        registry.SetShowFpsNonDebug(false);
+      }
+      
+      if (ImGui.Button("Open DB", half_button_size))
+        System.Diagnostics.Process.Start("D:\\Programs\\SQLite\\DB Browser for SQLite.exe", System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "db.db"));
+      ImGui.SameLine();
+      if (ImGui.Button("Open Dir", half_button_size))
+        System.Diagnostics.Process.Start("explorer.exe", "/select,\"" + System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RaylibArteSonat.exe") + "\"");
+      
       ImGui.SeparatorText("Resources");
+      String current_scene_name = registry.GetSceneManager().GetCurrentScene().GetName();
       Dictionary<String, Dictionary<String, Object>> objects = registry.GetContainer();
       Dictionary<String, Dictionary<String, Dictionary<String, Object>>> materials = registry.GetResourcesManager().GetStorage();
       
       // Current scene
       if (ImGui.TreeNode("Current Scene"))
       {
+        if (objects.ContainsKey(current_scene_name))
+        {
+          if (ImGui.TreeNode("Objects"))
+          {
+            foreach (KeyValuePair<String, dynamic> pair in objects[current_scene_name])
+            {
+              if (ImGui.TreeNode(pair.Key))
+              {
+                pair.Value.CallDebuggerInfo(registry);
+                ImGui.TreePop();
+              }
+            }
+            ImGui.TreePop();
+          }
+        }
         if (materials.ContainsKey(current_scene_name))
         {
           if (ImGui.TreeNode("Materials"))
@@ -83,81 +107,55 @@ public class DebuggerWindow(Registry registry)
             ImGui.TreePop();
           }
         }
-        if (objects.ContainsKey(current_scene_name))
-        {
-          if (ImGui.TreeNode("Objects"))
-          {
-            foreach (KeyValuePair<String, dynamic> pair in objects[current_scene_name])
-            {
-              if (ImGui.TreeNode(pair.Key))
-              {
-                pair.Value.CallDebuggerInfo(registry);
-                ImGui.TreePop();
-              }
-            }
-            ImGui.TreePop();
-          }
-        }
 
         ImGui.TreePop();
       } 
       
+      ImGui.Separator();
+      
       // Each other scene
-      foreach (KeyValuePair<String, Dictionary<String, Object>> pair in objects)
+      foreach (String scene_name in array)
       {
-        if (materials.ContainsKey(pair.Key))
+        if (materials.ContainsKey(scene_name) || objects.ContainsKey(scene_name))
         {
-          if (ImGui.TreeNode(pair.Key))
+          if (ImGui.TreeNode(scene_name))
           {
-            if (ImGui.TreeNode("Objects"))
+            if (objects.ContainsKey(scene_name))
             {
-              foreach (KeyValuePair<String, dynamic> obj in pair.Value)
+              if (ImGui.TreeNode("Objects"))
               {
-                if (ImGui.TreeNode(obj.Key))
+                foreach (KeyValuePair<String, dynamic> obj in objects[scene_name])
                 {
-                  obj.Value.CallDebuggerInfo(registry);
-                  ImGui.TreePop();
-                }
-              }
-              ImGui.TreePop();
-            }
-            if (ImGui.TreeNode("Materials"))
-            {
-              foreach (KeyValuePair<String, Dictionary<String, Object>> type in materials[pair.Key])
-              {
-                if (ImGui.TreeNode(type.Key))
-                {
-                  foreach (KeyValuePair<String, dynamic> mat in type.Value)
+                  if (ImGui.TreeNode(obj.Key))
                   {
-                    if (ImGui.TreeNode(mat.Key))
-                    {
-                      mat.Value.CallDebuggerInfo(registry);
-                      ImGui.TreePop();
-                    }
+                    obj.Value.CallDebuggerInfo(registry);
+                    ImGui.TreePop();
                   }
-                  ImGui.TreePop();
                 }
+                ImGui.TreePop();
               }
-              ImGui.TreePop();
             }
-            ImGui.TreePop();
-          }
-        }
-        else
-        {
-          if (ImGui.TreeNode(pair.Key))
-          {
-            if (ImGui.TreeNode("Objects"))
+            if (materials.ContainsKey(scene_name))
             {
-              foreach (KeyValuePair<String, dynamic> obj in pair.Value)
+              if (ImGui.TreeNode("Materials"))
               {
-                if (ImGui.TreeNode(obj.Key))
+                foreach (KeyValuePair<String, Dictionary<String, Object>> type in materials[scene_name])
                 {
-                  obj.Value.CallDebuggerInfo(registry);
-                  ImGui.TreePop();
+                  if (ImGui.TreeNode(type.Key))
+                  {
+                    foreach (KeyValuePair<String, dynamic> mat in type.Value)
+                    {
+                      if (ImGui.TreeNode(mat.Key))
+                      {
+                        mat.Value.CallDebuggerInfo(registry);
+                        ImGui.TreePop();
+                      }
+                    }
+                    ImGui.TreePop();
+                  }
                 }
+                ImGui.TreePop();
               }
-              ImGui.TreePop();
             }
             ImGui.TreePop();
           }
@@ -166,6 +164,11 @@ public class DebuggerWindow(Registry registry)
       
       // Managers
       ImGui.SeparatorText("Managers");
+      if (ImGui.TreeNode("Registry"))
+      {
+        registry.CallDebuggerInfo(registry);
+        ImGui.TreePop();
+      }
       if (ImGui.TreeNode("SceneManager"))
       {
         registry.GetSceneManager().CallDebuggerInfo(registry);
@@ -181,6 +184,11 @@ public class DebuggerWindow(Registry registry)
         registry.GetResourcesManager().CallDebuggerInfo(registry);
         ImGui.TreePop();
       }
+      if (ImGui.TreeNode("GuiManager"))
+      {
+        registry.GetGuiManager().CallDebuggerInfo(registry);
+        ImGui.TreePop();
+      }
       if (ImGui.TreeNode("DatabaseManager"))
       {
         registry.GetDatabaseManager().CallDebuggerInfo(registry);
@@ -191,9 +199,19 @@ public class DebuggerWindow(Registry registry)
         registry.GetAuthentificationManager().CallDebuggerInfo(registry);
         ImGui.TreePop();
       }
+      if (ImGui.TreeNode("MouseAnimationManager"))
+      {
+        registry.GetMouseAnimationManager().CallDebuggerInfo(registry);
+        ImGui.TreePop();
+      }
     }
 
     ImGui.End();
     rlImGui.End();
+  }
+
+  public void Draw()
+  {
+    if (registry.GetShowFpsNonDebug()) Raylib.DrawFPS(10, 10);
   }
 }

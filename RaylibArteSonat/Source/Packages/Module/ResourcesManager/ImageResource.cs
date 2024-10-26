@@ -22,25 +22,25 @@ public class ImageResource : MaterialTemplate
     _material = Raylib.LoadImageFromTexture(texture);
   }
   
-  public void Unload()
+  public new void Unload()
   {
     if (_filename == null) return;
     Raylib.UnloadImage(_material);
     Raylib.UnloadTexture(_render_material);
   }
 
-  public void Load()
+  public new void Load()
   {
     _material = Raylib.LoadImage(_filename);
     _render_material = Raylib.LoadTexture(_filename);
   }
   
-  public new Texture2D GetMaterial()
+  public new Image GetMaterial()
   {
     return _material;
   }
   
-  public new Texture2D GetRenderMaterial()
+  public Texture2D GetRenderMaterial()
   {
     return _render_material;
   }

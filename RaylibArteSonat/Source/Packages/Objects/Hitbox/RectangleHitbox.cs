@@ -10,10 +10,10 @@ public class RectangleHitbox(Vector2 position, Vector2 size, Color color) : Hitb
   {
     if (ImGui.TreeNode("Hitbox"))
     {
-      ImGui.Text($"- Position: {_position.X}, {_position.Y}");
-      ImGui.Text($"- Size: {_size.X}, {_size.Y}");
+      ImGui.Text($" > Position: {_position.X}, {_position.Y}");
+      ImGui.Text($" > Size: {_size.X}, {_size.Y}");
       ImGui.BeginGroup();
-      ImGui.Text($"- Color:");
+      ImGui.Text($" > Color:");
       ImGui.SameLine();
       ImGui.TextColored(new Vector4(255, 0, 0, 255), _color.R.ToString());
       ImGui.SameLine();
@@ -25,12 +25,12 @@ public class RectangleHitbox(Vector2 position, Vector2 size, Color color) : Hitb
       
       ImGui.Separator();
       
-      ImGui.TextColored(new Vector4(50, 50, 50, 255), "# Mouse list = [LMB|RMB|MMB]");
-      ImGui.Text($"- Mouse Hovered: {(_hitbox_click_hover ? 1 : 0)}");
-      ImGui.Text($"- Mouse Pressed: {(_hitbox_click_press[0] ? 1 : 0)}|{(_hitbox_click_press[1] ? 1 : 0)}|{(_hitbox_click_press[2] ? 1 : 0)}");
-      ImGui.Text($"- Mouse Outside Pressed: {(_hitbox_click_outside_press[0] ? 1 : 0)}|{(_hitbox_click_outside_press[1] ? 1 : 0)}|{(_hitbox_click_outside_press[2] ? 1 : 0)}");
-      ImGui.Text($"- Mouse Held: {(_hitbox_click_hold[0] ? 1 : 0)}|{(_hitbox_click_hold[1] ? 1 : 0)}|{(_hitbox_click_hold[2] ? 1 : 0)}");
-      ImGui.Text($"- Mouse Released: {(_hitbox_click_release[0] ? 1 : 0)}|{(_hitbox_click_release[1] ? 1 : 0)}|{(_hitbox_click_release[2] ? 1 : 0)}");
+      ImGui.TextColored(new Vector4(30, 30, 30, 1), " # Mouse list = [LMB|RMB|MMB]");
+      ImGui.Text($" > Mouse Hovered: {(_hitbox_click_hover ? 1 : 0)}");
+      ImGui.Text($" > Mouse Pressed: {(_hitbox_click_press[0] ? 1 : 0)}|{(_hitbox_click_press[1] ? 1 : 0)}|{(_hitbox_click_press[2] ? 1 : 0)}");
+      ImGui.Text($" > Mouse Outside Pressed: {(_hitbox_click_outside_press[0] ? 1 : 0)}|{(_hitbox_click_outside_press[1] ? 1 : 0)}|{(_hitbox_click_outside_press[2] ? 1 : 0)}");
+      ImGui.Text($" > Mouse Held: {(_hitbox_click_hold[0] ? 1 : 0)}|{(_hitbox_click_hold[1] ? 1 : 0)}|{(_hitbox_click_hold[2] ? 1 : 0)}");
+      ImGui.Text($" > Mouse Released: {(_hitbox_click_release[0] ? 1 : 0)}|{(_hitbox_click_release[1] ? 1 : 0)}|{(_hitbox_click_release[2] ? 1 : 0)}");
       
       ImGui.TreePop();
     }

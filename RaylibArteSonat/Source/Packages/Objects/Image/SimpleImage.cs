@@ -13,11 +13,11 @@ public class SimpleImage(ImageResource material, Vector2 position, Color? tint =
 
   public new void CallDebuggerInfo(Registry registry)
   {
-    ImGui.Text($"- Position: {_position.X}, {_position.Y}");
-    ImGui.Text($"- Size: {_image.Width}, {_image.Height}");
+    ImGui.Text($" > Position: {_position.X}, {_position.Y}");
+    ImGui.Text($" > Size: {_image.Width}, {_image.Height}");
     
     ImGui.BeginGroup();
-    ImGui.Text($"- Color:");
+    ImGui.Text($" > Color:");
     ImGui.SameLine();
     ImGui.TextColored(new Vector4(255, 0, 0, 255), _tint.R.ToString());
     ImGui.SameLine();

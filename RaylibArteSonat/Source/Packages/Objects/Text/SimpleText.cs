@@ -76,13 +76,13 @@ public class SimpleText : ObjectTemplate
   {
     if (ImGui.TreeNode(debugger_name))
     {
-      ImGui.Text($"- Position: {_position.X}, {_position.Y}");
-      ImGui.Text($"- Offset: {_offset.X}, {_offset.Y}");
-      ImGui.Text($"- Size: {_size.X}, {_size.Y}");
-      ImGui.Text($"- Text: {GetText()}");
-      ImGui.Text($"- Color: {_color.R}, {_color.G}, {_color.B}, {_color.A}");
-      ImGui.Text($"- Font Size: {_font_size}");
-      ImGui.Text($"- Font Spacing: {_font_spacing}");
+      ImGui.Text($" > Position: {_position.X}, {_position.Y}");
+      ImGui.Text($" > Offset: {_offset.X}, {_offset.Y}");
+      ImGui.Text($" > Size: {_size.X}, {_size.Y}");
+      ImGui.Text($" > Text: {GetText()}");
+      ImGui.Text($" > Color: {_color.R}, {_color.G}, {_color.B}, {_color.A}");
+      ImGui.Text($" > Font Size: {_font_size}");
+      ImGui.Text($" > Font Spacing: {_font_spacing}");
       ImGui.TreePop();
     }
   }

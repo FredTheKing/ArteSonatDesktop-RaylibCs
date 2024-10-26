@@ -15,12 +15,24 @@ public class AuthenticationManager : CallDebuggerInfoTemplate
     _current_profile = _profiles[_profiles.Keys.ToList()[0]];
     Console.WriteLine("INFO: AUTH: Profiles loaded successfully");
   }
+
+  public void AddProfile(Registry registry, string nickname, string encrypt_key, string age)
+  {
+    registry.GetDatabaseManager().RunCommand("INSERT INTO Profile (name, encrypt_key, age) VALUES ('" + nickname + "', " + (encrypt_key != "" ? "'" + encrypt_key + "'" : "null") + ", " + Convert.ToInt32(age) + ")");
+    _profiles.Clear();
+    registry.GetAuthentificationManager().InitProfiles(registry.GetDatabaseManager().GetTable("Profile"));
+    Console.WriteLine("INFO: AUTH: Profile added successfully");
+  }
   
   public Dictionary<string, Profile> GetProfiles() => _profiles;
 
   public List<string> GetProfilesNames() => _profiles.Keys.ToList();
 
-  public void ChangeProfile(string name) => _current_profile = _profiles[name];
+  public void ChangeProfile(string name)
+  {
+    _current_profile = _profiles[name];
+    Console.WriteLine("INFO: AUTH: Profile changed successfully");
+  }
 
   public Profile GetCurrentProfile() => _current_profile;
 }

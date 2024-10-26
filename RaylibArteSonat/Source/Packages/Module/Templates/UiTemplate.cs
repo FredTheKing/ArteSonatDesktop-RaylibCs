@@ -22,6 +22,12 @@ public class UiTemplate : ObjectTemplate
     else if (multi_outside_pressed || registry.GetShortcutManager().IsKeyPressed(KeyboardKey.Escape)) _focused = false;
   }
 
+  public new void SetPosition(Vector2 new_position)
+  {
+    _position = new_position;
+    _hitbox.SetPosition(new_position);
+  }
+
   public virtual void MidUpdate(Registry registry) { }
   
   public new void Update(Registry registry)

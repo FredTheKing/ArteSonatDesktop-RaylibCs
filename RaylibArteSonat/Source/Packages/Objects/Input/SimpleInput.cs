@@ -13,7 +13,7 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
   protected readonly string _placeholder_text = placeholder_text;
   
   protected string _text = "";
-  protected SimpleText _display_text = new(position, size, 18, Color.Black, font, true);
+  protected SimpleText _display_text = new(position, size, 24, Color.Black, font, true);
   protected SimpleTimer _ibeam_timer = new(0.5f, false, true);
   protected SimpleTimer _backspace_timer = new(0.6f, false, true, false);
   protected SimpleTimer _deleting_timer = new(0.04f, false, true);
@@ -25,19 +25,19 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
 
   public new void CallDebuggerInfo(Registry registry)
   {
-    ImGui.Text($"- Position: {_position.X}, {_position.Y}");
-    ImGui.Text($"- Size: {_size.X}, {_size.Y}");
+    ImGui.Text($" > Position: {_position.X}, {_position.Y}");
+    ImGui.Text($" > Size: {_size.X}, {_size.Y}");
     ImGui.Separator();
-    ImGui.Text($"- Input Value: {(_text != "" ? _text : "!# EMPTY #!")}");
-    ImGui.Text($"- Display Value: {(_display_text.GetText() != "" ? _display_text.GetText() : "!# EMPTY #!")}");
-    ImGui.Text($"- Raw Display Value: {_display_text.GetTextRaw()}");
+    ImGui.Text($" > Input Value: {(_text != "" ? _text : "!# EMPTY #!")}");
+    ImGui.Text($" > Display Value: {(_display_text.GetText() != "" ? _display_text.GetText() : "!# EMPTY #!")}");
+    ImGui.Text($" > Raw Display Value: {_display_text.GetTextRaw()}");
     ImGui.Separator();
-    ImGui.Text($"- Min Length: {_min_length}");
-    ImGui.Text($"- Max Length: {_max_length}");
-    ImGui.Text($"- Current Length: {_text.Length}");
+    ImGui.Text($" > Min Length: {_min_length}");
+    ImGui.Text($" > Max Length: {_max_length}");
+    ImGui.Text($" > Current Length: {_text.Length}");
     ImGui.Separator();
-    ImGui.Text($"- Focused: {(_focused ? 1 : 0)}");
-    ImGui.Text($"- Show IBeam: {(_ibeam_show ? 1 : 0)}");
+    ImGui.Text($" > Focused: {(_focused ? 1 : 0)}");
+    ImGui.Text($" > Show IBeam: {(_ibeam_show ? 1 : 0)}");
     
     _hitbox.CallDebuggerInfo(registry);
     _display_text.CallDebuggerInfo(registry);
@@ -113,8 +113,8 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
 
   protected void ChangeMouseAnimation(Registry registry)
   {
-    if (_hitbox.GetMouseHover()) Raylib.SetMouseCursor(MouseCursor.IBeam);
-    else Raylib.SetMouseCursor(MouseCursor.Default);
+    var manager = registry.GetMouseAnimationManager();
+    if (!_hitbox.GetMouseHover()) manager.AddIbeamHover();
   }
 
   public new void SetPosition(Vector2 new_position)
@@ -123,6 +123,8 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
     _hitbox.SetPosition(new_position);
     _display_text.SetPosition(new_position);
   }
+
+  public string GetText() => _text;
 
   protected void CheckIBeamAnimation(Registry registry)
   {
@@ -135,12 +137,13 @@ public class SimpleInput(Vector2 position, Vector2 size, sbyte min_length, sbyte
     _text = "";
     _hitbox.Activation(registry);
     base.Activation(registry);
+    registry.GetMouseAnimationManager().AddIbeamItem();
   }
   
   public override void MidUpdate(Registry registry)
   {
     CheckIBeamStarting(registry);
-    UpdateText(registry);
+    if (_focused) UpdateText(registry);
     UpdateDisplayText();
     ChangeMouseAnimation(registry);
     CheckIBeamAnimation(registry);

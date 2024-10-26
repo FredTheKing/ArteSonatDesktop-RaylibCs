@@ -9,7 +9,7 @@ public class HitboxImage(ImageResource material, Vector2 position, Color? color 
 {
   private RectangleHitbox _hitbox = new RectangleHitbox(position, new Vector2(0, 0), color ?? new Color(255, 0, 0, 123));
 
-  public void CallDebuggerInfo(Registry registry)
+  public new void CallDebuggerInfo(Registry registry)
   {
     base.CallDebuggerInfo(registry);
     _hitbox.CallDebuggerInfo(registry);
